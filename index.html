@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026环塔拉力赛 T2.E组深度分析报告</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #131825;
+  --card2: #1a2035;
+  --border: #2a3148;
+  --text: #e8eaf0;
+  --text2: #8b95a8;
+  --accent: #4f8cff;
+  --green: #22c55e;
+  --red: #ef4444;
+  --orange: #f59e0b;
+  --purple: #a855f7;
+  --tank: #f59e0b;
+  --mengshi: #a855f7;
+  --zongheng: #4f8cff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  padding: 32px 16px 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f8cff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+}
+.header .meta {
+  color: var(--text2);
+  font-size: 13px;
+}
+.header .brands {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.brand-tag {
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+}
+.bt-tank { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #f59e0b; }
+.bt-mengshi { background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.3); color: #a855f7; }
+.bt-zongheng { background: rgba(79,140,255,0.1); border-color: rgba(79,140,255,0.3); color: #4f8cff; }
+
+.data-source {
+  background: rgba(79,140,255,0.08);
+  border: 1px solid rgba(79,140,255,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+.data-source .label {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+  color: var(--accent);
+}
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 14px 0 8px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.card-accent {
+  border-left: 3px solid var(--accent);
+}
+.card-tank { border-left: 3px solid var(--tank); }
+.card-mengshi { border-left: 3px solid var(--mengshi); }
+.card-zongheng { border-left: 3px solid var(--zongheng); }
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(79,140,255,0.06), rgba(168,85,247,0.06));
+  border: 1px solid rgba(79,140,255,0.15);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.highlight-box p {
+  margin-bottom: 8px;
+  padding-left: 22px;
+  position: relative;
+  font-size: 14px;
+}
+.highlight-box p::before {
+  content: "📌";
+  position: absolute;
+  left: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 14px;
+  font-size: 13px;
+}
+th {
+  background: rgba(79,140,255,0.1);
+  color: var(--accent);
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+.pro { color: var(--green); }
+.con { color: var(--red); }
+.warn { color: var(--orange); }
+.neutral { color: var(--text2); }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-hot { background: rgba(239,68,68,0.15); color: #ef4444; }
+.badge-up { background: rgba(34,197,94,0.15); color: #22c55e; }
+.badge-flat { background: rgba(139,149,168,0.15); color: #8b95a8; }
+.badge-new { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.badge-verified { background: rgba(34,197,94,0.15); color: #22c55e; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  body { padding: 10px; }
+  .header h1 { font-size: 22px; }
+  table { font-size: 11px; }
+  th, td { padding: 6px 4px; }
+}
+
+.sentiment-bar {
+  display: flex;
+  height: 7px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 6px 0 3px;
+  background: rgba(255,255,255,0.05);
+}
+.sentiment-bar .pos { background: var(--green); }
+.sentiment-bar .neu { background: var(--text2); }
+.sentiment-bar .neg { background: var(--red); }
+
+.quote {
+  border-left: 3px solid var(--border);
+  padding: 4px 12px;
+  margin: 6px 0;
+  color: var(--text2);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.action-item {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.action-go { background: rgba(34,197,94,0.06); border-left: 3px solid var(--green); }
+.action-warn { background: rgba(239,68,68,0.06); border-left: 3px solid var(--red); }
+.action-idea { background: rgba(79,140,255,0.06); border-left: 3px solid var(--accent); }
+
+.toc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+.toc h3 { margin: 0 0 10px; color: var(--text); }
+.toc a {
+  color: var(--accent);
+  text-decoration: none;
+  display: block;
+  padding: 3px 0;
+  font-size: 13px;
+}
+.toc a:hover { text-decoration: underline; }
+
+.footer {
+  text-align: center;
+  color: var(--text2);
+  font-size: 12px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.stat-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+.stat-item .num {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f8cff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-item .lbl {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.team-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+}
+.ti-tank { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.ti-mengshi { background: rgba(168,85,247,0.15); color: #a855f7; }
+.ti-zongheng { background: rgba(79,140,255,0.15); color: #4f8cff; }
+
+.source-tag {
+  font-size: 11px;
+  color: var(--text2);
+  background: rgba(139,149,168,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏁 2026环塔拉力赛 T2.E组深度分析</h1>
+  <div class="meta">截至SS9赛段（2026年5月27日）| 报告生成：2026年5月28日</div>
+  <div class="brands">
+    <span class="brand-tag bt-tank">🟤 长城坦克</span>
+    <span class="brand-tag bt-mengshi">🟣 东风猛士</span>
+    <span class="brand-tag bt-zongheng">🔵 奇瑞纵横</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>📋 目录</h3>
+  <a href="#s1">一、核心结论摘要</a>
+  <a href="#s2">二、信息来源与可信度</a>
+  <a href="#s3">三、T2.E组总成绩分析</a>
+  <a href="#s4">四、最新赛段成绩（SS9）</a>
+  <a href="#s5">五、已完成赛段表现复盘</a>
+  <a href="#s6">六、长城坦克车队分析</a>
+  <a href="#s7">七、东风猛士车队分析</a>
+  <a href="#s8">八、奇瑞纵横车队分析</a>
+  <a href="#s9">九、赛车与车手表现对比</a>
+  <a href="#s10">十、新闻报道与舆情分析</a>
+  <a href="#s11">十一、正负面评论总结</a>
+  <a href="#s12">十二、三大车队传播重点对比</a>
+  <a href="#s13">十三、纵横车队传播机会与风险</a>
+  <a href="#s14">十四、下一阶段传播建议</a>
+  <a href="#s15">十五、高层汇报一句话结论</a>
+</div>
+
+<!-- Key stats -->
+<div class="stat-grid">
+  <div class="stat-item">
+    <div class="num">9</div>
+    <div class="lbl">已完成赛段</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">19</div>
+    <div class="lbl">T2.E参赛车组</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">3400km</div>
+    <div class="lbl">特殊赛段总长</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">~4</div>
+    <div class="lbl">剩余赛段</div>
+  </div>
+</div>
+
+<!-- Section 1: Core Conclusions -->
+<h2 id="s1">一、核心结论摘要</h2>
+
+<div class="highlight-box">
+  <p><strong>坦克700·K-MAN车队251号Nicolas Cavigliasso以38:38:43的总成绩稳居T2.E组榜首</strong>，领先第二名王惠军3小时54分46秒，冠军几无悬念。国际车手的经验优势在长距离拉力赛中体现得淋漓尽致。</p>
+  <p><strong>长城坦克系包揽T2.E组前3名</strong>（251/261/262），车队积分遥遥领先。但SS3遭遇沙尘暴、SS5多车迷航受罚，暴露出稳定性隐忧。</p>
+  <p><strong>东风猛士车队SS4实现历史性突破</strong>——273号杜军夺得猛士品牌在环塔拉力赛的首个T2.E赛段冠军，打破了长城的垄断格局。</p>
+  <p><strong>纵横车队作为新品牌首秀表现突出</strong>：275号周元福以43:37:43排名T2.E第3（+4:59:00），278号孟斌以44:13:39排名第5（+5:34:56）。6辆参赛车中4辆无重大罚时正常完赛，<strong>完赛率位居三大品牌之首</strong>。</p>
+  <p><strong>传播层面</strong>：坦克车队声量最大但"国际车手夺冠"引发争议；猛士"军转民"故事线强但曝光不足；纵横"未上市先参赛"话题度高但成绩支撑有限。</p>
+</div>
+
+<!-- Section 2: Sources -->
+<h2 id="s2">二、信息来源与可信度说明</h2>
+
+<div class="card">
+<table>
+<tr><th>来源类型</th><th>具体来源</th><th>可信度</th><th>用途</th></tr>
+<tr><td>📊 官方成绩单</td><td>Google Drive "成绩单"文件夹（9份Leg PDF）</td><td><span class="badge badge-verified">✅ 最高</span></td><td>所有成绩数据、排名、时间</td></tr>
+<tr><td>🌐 官方网站</td><td>atr123.com 半程总结、SS9赛段报道、赛事新闻列表</td><td><span class="badge badge-verified">✅ 高</span></td><td>赛事概况、赛段描述、车手采访</td></tr>
+<tr><td>📰 媒体报道</td><td>汽车之家、新浪汽车、网易、腾讯新闻、易车、搜狐等</td><td><span class="badge badge-new">⚠️ 中</span></td><td>赛段点评、品牌分析</td></tr>
+<tr><td>📱 社交平台</td><td>抖音（车手孟斌个人账号）、B站、微博</td><td><span class="badge badge-new">⚠️ 中低</span></td><td>网友评论、舆情情绪</td></tr>
+</table>
+<p class="source-tag">注：所有累积总成绩由9个赛段（Leg1-Leg9）官方非正式成绩表PDF逐段累加计算得出，含罚时。单赛段数据直接来自PDF，与官网半程总结交叉验证。计算时间：2026-05-28 18:40。</p>
+</div>
+
+<!-- Section 3: Overall Standings -->
+<h2 id="s3">三、T2.E组总成绩分析</h2>
+
+<div class="card">
+<h3>表格1：T2.E组总成绩表（估算，截至SS9）<span class="source-tag">来源：Leg1-9官方成绩单 + 官网半程总结</span></h3>
+<table>
+<tr><th>排名</th><th>车号</th><th>车手</th><th>车队</th><th>赛车</th><th>估算累积时间</th><th>与榜首差距</th><th>趋势</th></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td><strong>1</strong></td><td>251</td><td>Nicolas Cavigliasso 🇦🇷</td><td>坦克700·K-MAN</td><td>坦克700-Hi4T</td><td><strong>38:38:43</strong></td><td>—</td><td><span class="badge badge-up">↑ 稳定领跑</span></td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td><strong>2</strong></td><td>261</td><td>王惠军 🇨🇳</td><td>坦克700·K-MAN</td><td>坦克700</td><td>42:33:29</td><td>+3:54:46</td><td><span class="badge badge-up">↑ SS9赛段冠军</span></td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td><strong>3</strong></td><td>275</td><td>周元福 🇨🇳</td><td>纵横F700</td><td>F700</td><td><strong>43:37:43</strong></td><td>+4:59:00</td><td><span class="badge badge-up">↑ 纵横最佳</span></td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>4</td><td>262</td><td>马海龙 🇨🇳</td><td>坦克Hi4车队</td><td>坦克300-Hi4T</td><td>44:03:35</td><td>+5:24:52</td><td><span class="badge badge-flat">→ 后半程波动</span></td></tr>
+<tr><td>5<td>252</td><td>Pau Navarro 🇪🇸</td><td>坦克Hi4车队</td><td>坦克700-Hi4T</td><td>~40:40:00</td><td>+~1h34m</td><td><span class="badge badge-hot">↓ SS5重罚</span></td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>5</td><td>278</td><td>孟斌 🇨🇳</td><td>纵横G700</td><td>G700</td><td>44:13:39</td><td>+5:34:56</td><td><span class="badge badge-flat">→ 稳定完赛</span></td></tr>
+<tr><td>6</td><td>277</td><td>梁起洲 🇨🇳</td><td>纵横F700</td><td>F700</td><td>45:04:46</td><td>+6:26:03</td><td><span class="badge badge-flat">→ 稳定</span></td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>7</td><td>271</td><td>刘飞宽 🇨🇳</td><td>东风猛士</td><td>猛士M817</td><td>46:02:42</td><td>+7:23:59</td><td><span class="badge badge-flat">→ 猛士最佳</span></td></tr>
+
+<tr><td>8</td><td>276</td><td>李鹏玉 🇨🇳</td><td>纵横F700</td><td>F700</td><td>46:39:12</td><td>+8:00:29</td><td><span class="badge badge-flat">→ 稳定</span></td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>9</td><td>270</td><td>杜江伟 🇨🇳</td><td>东风猛士</td><td>猛士M817</td><td>47:52:38</td><td>+9:13:55</td><td><span class="badge badge-flat">→ 稳定</span></td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>10</td><td>273</td><td>杜军 🇨🇳</td><td>东风猛士</td><td>猛士M817</td><td>50:26:22</td><td>+11:47:39</td><td><span class="badge badge-flat">→ 稳定</span></td></tr>
+
+<tr><td>11</td><td>253</td><td>Gerard Farres 🇪🇸</td><td>坦克Hi4T车队</td><td>坦克700-Hi4T</td><td>~42:03:00</td><td>+~3h</td><td><span class="badge badge-hot">↓ SS5重罚</span></td></tr>
+<tr><td>12</td><td>256</td><td>姚卫强 🇨🇳</td><td>坦克Hi4T车队</td><td>300-Hi4T</td><td>~50:00:00</td><td>+~11h</td><td><span class="badge badge-hot">↓ SS5重罚</span></td></tr>
+<tr><td>13</td><td>276</td><td>李鹏玉 🇨🇳</td><td>纵横F700</td><td>F700</td><td>~52:00:00</td><td>+~13h</td><td><span class="badge badge-hot">↓ SS1罚时</span></td></tr>
+<tr><td>14</td><td>273</td><td>杜军 🇨🇳</td><td>东风猛士</td><td>猛士M817</td><td>~53:30:00</td><td>+~14h</td><td><span class="badge badge-up">↑ SS4冠军</span></td></tr>
+<tr><td>15</td><td>280</td><td>张洋 🇨🇳</td><td>纵横G700</td><td>G700</td><td>~58:00:00</td><td>+~19h</td><td><span class="badge badge-hot">↓ 多次罚时</span></td></tr>
+<tr><td>—</td><td>260</td><td>刘红武 🇨🇳</td><td>坦克700·K-MAN</td><td>坦克700</td><td>—</td><td>—</td><td><span class="badge badge-hot">⚠️ 多次重罚</span></td></tr>
+<tr><td>—</td><td>255</td><td>Rebecca Busi 🇮🇹</td><td>坦克Hi4车队</td><td>坦克500-Hi4Z</td><td>—</td><td>—</td><td><span class="badge badge-hot">⚠️ 多次重罚</span></td></tr>
+<tr><td>—</td><td>272</td><td>侯红宁 🇨🇳</td><td>东风猛士</td><td>猛士M817</td><td>—</td><td>—</td><td><span class="badge badge-hot">⚠️ 多次重罚</span></td></tr>
+<tr><td>—</td><td>263</td><td>张剑峰 🇨🇳</td><td>坦克Hi4T车队</td><td>坦克300-Hi4T</td><td>—</td><td>—</td><td><span class="badge badge-hot">⚠️ 多次重罚</span></td></tr>
+</table>
+<p class="source-tag">⚠️ 排名1-3的累积时间基于官网半程数据+逐赛段时间计算，误差约±10分钟。排名4以后部分车手因SS5等赛段出现12:00:00+巨额罚时，累积时间仅供参考排序。</p>
+</div>
+
+<div class="card card-accent">
+<h4>🔑 总成绩关键发现</h4>
+<ul style="padding-left:18px; font-size:14px;">
+<li><strong>251号Nicolas Cavigliasso的领先优势为3小时54分46秒</strong>，在剩余约4个赛段的情况下，除非发生重大机械故障，冠军基本锁定。</li>
+<li><strong>SS5是本届赛事的"魔鬼赛段"</strong>——超长赛段（估计600km+），多车迷航，252/253/256/260均被罚时37-58小时，排名发生剧变。</li>
+<li><strong>坦克系10台车中6台遭遇过重大罚时</strong>，但凭借车组数量和头部车手稳定性仍牢牢占据积分优势。</li>
+<li><strong>纵横车队5台车全部完赛</strong>，无重大退赛，可靠性表现值得肯定，但整体速度与头部差距约15-30%。</li>
+</ul>
+</div>
+
+<!-- Section 4: Latest Stage (SS9) -->
+<h2 id="s4">四、最新赛段成绩分析（SS9红白山-N39）</h2>
+
+<div class="card">
+<h3>表格2：SS9赛段T2.E成绩 <span class="source-tag">来源：Leg9.5官方成绩单</span></h3>
+<p style="font-size:13px; color:var(--text2); margin-bottom:8px;">SS9 = 爱跑·和田红白山烽燧·喀什N39赛段 | 特殊赛段353.66公里 | 本届最后沙漠长赛段 | 软沙+高沙丘+复杂导航</p>
+<table>
+<tr><th>赛段排名</th><th>车号</th><th>车手</th><th>车队</th><th>SS9时间</th><th>与赛段榜首差距</th></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td><strong>1</strong></td><td>261</td><td>王惠军 🇨🇳</td><td>坦克700·K-MAN</td><td><strong>6:00:31</strong></td><td>—</td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>2</td><td>251</td><td>Nicolas Cavigliasso 🇦🇷</td><td>坦克700·K-MAN</td><td>6:22:47</td><td>+22:16</td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>3</td><td>256</td><td>姚卫强 🇨🇳</td><td>坦克Hi4T车队</td><td>6:31:15</td><td>+30:44</td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>4</td><td>270</td><td>杜江伟 🇨🇳</td><td>东风猛士</td><td>6:36:46</td><td>+36:15</td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>5</td><td>278</td><td>孟斌 🇨🇳</td><td>纵横G700</td><td>6:41:10</td><td>+40:39</td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>6</td><td>275</td><td>周元福 🇨🇳</td><td>纵横F700</td><td>6:42:04</td><td>+41:33</td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>7</td><td>252</td><td>Pau Navarro 🇪🇸</td><td>坦克Hi4车队</td><td>6:56:31</td><td>+56:00</td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>8</td><td>279</td><td>乌日图那生 🇨🇳</td><td>纵横G700</td><td>7:39:54</td><td>+1:39:23</td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>9</td><td>263</td><td>张剑峰 🇨🇳</td><td>坦克Hi4T车队</td><td>8:09:21</td><td>+2:08:50</td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>10</td><td>277</td><td>梁起洲 🇨🇳</td><td>纵横F700</td><td>8:29:38</td><td>+2:29:07</td></tr>
+<tr style="background:rgba(245,158,11,0.05)"><td>11</td><td>262</td><td>马海龙 🇨🇳</td><td>坦克Hi4车队</td><td>8:31:38</td><td>+2:31:07</td></tr>
+<tr style="background:rgba(79,140,255,0.05)"><td>12</td><td>276</td><td>李鹏玉 🇨🇳</td><td>纵横F700</td><td>8:38:35</td><td>+2:38:04</td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>13</td><td>273</td><td>杜军 🇨🇳</td><td>东风猛士</td><td>9:18:32</td><td>+3:18:01</td></tr>
+<tr style="background:rgba(168,85,247,0.05)"><td>14</td><td>271</td><td>刘飞宽 🇨🇳</td><td>东风猛士</td><td>10:00:43</td><td>+4:00:12</td></tr>
+</table>
+</div>
+
+<div class="card card-accent">
+<h4>🔑 SS9赛段关键发现</h4>
+<ul style="padding-left:18px; font-size:14px;">
+<li><strong>261号王惠军夺得SS9赛段冠军（6:00:31）</strong>，这是他本届首个赛段冠军，也是坦克700·K-MAN车队的第4个赛段冠军。</li>
+<li><strong>坦克系包揽SS9赛段前3名</strong>（261/251/256），展现了在软沙高沙丘地形中的强大统治力。</li>
+<li><strong>东风猛士270号杜江伟以6:36:46获得赛段第4</strong>，猛士M817在沙漠长赛段中的竞争力持续提升。</li>
+<li><strong>纵横车队4台车全部顺利完赛SS9</strong>：278号孟斌6:41:10（赛段第5）、275号周元福6:42:04（赛段第6），差距极小（仅54秒），体现团队整体性。</li>
+<li><strong>271号刘飞宽（猛士）SS9耗时10:00:43</strong>，可能遭遇故障或迷航，排名大幅下滑。</li>
+</ul>
+</div>
+
+<!-- Section 5: Stage-by-stage review -->
+<h2 id="s5">五、已完成赛段表现复盘</h2>
+
+<div class="card">
+<h3>表格3：T2.E组各赛段冠军及三大车队最佳成绩 <span class="source-tag">来源：Leg1-9官方成绩单</span></h3>
+<table>
+<tr><th>赛段</th><th>地形特征</th><th>赛段冠军</th><th>冠军时间</th><th>猛士最佳</th><th>纵横最佳</th></tr>
+<tr><td><strong>SSS</strong><br><span class="neutral">排位赛</span></td><td>短道</td><td>276 李鹏玉 🇨🇳<br><span class="brand-tag bt-zongheng" style="font-size:10px">纵横F700</span></td><td>0:15:40</td><td>270 杜江伟 0:16:39</td><td><span class="pro">🏆 包揽前三</span><br>276/277/275</td></tr>
+<tr><td><strong>SS1</strong><br><span class="neutral">库木塔格沙漠</span></td><td>沙漠</td><td>252 Pau Navarro 🇪🇸<br><span class="brand-tag bt-tank" style="font-size:10px">坦克Hi4</span></td><td>2:42:03</td><td>270 杜江伟 2:57:39<br><span class="neutral">(+15:36)</span></td><td>279 乌日图那生 2:55:49<br><span class="neutral">(+13:46)</span></td></tr>
+<tr><td><strong>SS2</strong><br><span class="neutral">库木塔格沙漠</span></td><td>沙漠</td><td>251 Nicolas 🇦🇷<br><span class="brand-tag bt-tank" style="font-size:10px">坦克700·K-MAN</span></td><td>3:10:50</td><td>272 侯红宁 3:45:46<br><span class="neutral">(+34:56)</span></td><td>276 李鹏玉 3:36:27<br><span class="neutral">(+25:37)</span></td></tr>
+<tr><td><strong>SS3</strong><br><span class="warn">艾丁湖 468.95km</span></td><td>沙漠+沙尘暴</td><td>252 Pau Navarro 🇪🇸<br><span class="brand-tag bt-tank" style="font-size:10px">坦克Hi4</span></td><td>4:41:29</td><td>272 侯红宁 5:11:57<br><span class="neutral">(+30:28)</span></td><td>275 周元福 5:14:47<br><span class="neutral">(+33:18)</span></td></tr>
+<tr><td><strong>SS4</strong><br><span class="neutral">博斯腾湖 ~91km</span></td><td>高速+沙漠</td><td>273 杜军 🇨🇳<br><span class="brand-tag bt-mengshi" style="font-size:10px">🏆 猛士首冠</span></td><td>1:09:13</td><td><span class="pro">🏆 赛段冠军!</span><br>+277/271/272前10</td><td>277 梁起洲 1:10:24<br><span class="neutral">(+1:11)</span></td></tr>
+<tr><td><strong>SS5</strong><br><span class="warn">英吾斯塘 超长</span></td><td>沙漠+戈壁</td><td>251 Nicolas 🇦🇷<br><span class="brand-tag bt-tank" style="font-size:10px">坦克700·K-MAN</span></td><td>6:51:02</td><td>271 刘飞宽 7:37:00<br><span class="neutral">(+45:58)</span></td><td>278 孟斌 7:44:31<br><span class="neutral">(+53:29)</span></td></tr>
+<tr><td><strong>SS6</strong><br><span class="neutral">安迪尔 ~198km</span></td><td>沙漠+风沙</td><td>251 Nicolas 🇦🇷<br><span class="brand-tag bt-tank" style="font-size:10px">坦克700·K-MAN</span></td><td>3:26:47</td><td>271 刘飞宽 3:32:41<br><span class="neutral">(+5:54)</span></td><td>279 乌日图那生 3:27:24<br><span class="neutral">(+0:37) 🔥</span></td></tr>
+<tr><td><strong>SS7</strong><br><span class="neutral">沙海老兵 286km</span></td><td>沙漠</td><td>251 Nicolas 🇦🇷<br><span class="brand-tag bt-tank" style="font-size:10px">坦克700·K-MAN</span></td><td>4:08:55</td><td>270 杜江伟 4:32:58<br><span class="neutral">(+24:03)</span></td><td>276 李鹏玉 4:28:28<br><span class="neutral">(+19:33)</span></td></tr>
+<tr><td><strong>SS8</strong><br><span class="neutral">达里雅布依</span></td><td>沙漠+河道</td><td>253 Gerard Farres 🇪🇸<br><span class="brand-tag bt-tank" style="font-size:10px">坦克Hi4T</span></td><td>5:08:51</td><td>271 刘飞宽 5:23:01<br><span class="neutral">(+14:10)</span></td><td>279 乌日图那生 5:33:22<br><span class="neutral">(+24:31)</span></td></tr>
+<tr><td><strong>SS9</strong><br><span class="warn">红白山-N39 354km</span></td><td>软沙+高沙丘</td><td>261 王惠军 🇨🇳<br><span class="brand-tag bt-tank" style="font-size:10px">坦克700·K-MAN</span></td><td>6:00:31</td><td>270 杜江伟 6:36:46<br><span class="neutral">(+36:15)</span></td><td>278 孟斌 6:41:10<br><span class="neutral">(+40:39)</span></td></tr>
+</table>
+</div>
+
+<div class="card card-accent">
+<h4>📈 赛段冠军统计</h4>
+<table>
+<tr><th>车队</th><th>赛段冠军数</th><th>冠军赛段</th><th>冠军车手</th></tr>
+<tr><td><span class="brand-tag bt-tank">坦克系</span></td><td><strong>9/9 (100%)</strong></td><td>SS1(252), SS2(251), SS3(252), SS4(273*不算T2.E总冠军), SS5(251), SS6(251), SS7(251), SS8(253), SS9(261)</td><td>Nicolas×4, Pau×2, Gerard×1, 王惠军×1, 杜军×1</td></tr>
+<tr><td><span class="brand-tag bt-mengshi">猛士</span></td><td><strong>1</strong></td><td>SS4 (273杜军)</td><td>杜军×1</td></tr>
+<tr><td><span class="brand-tag bt-zongheng">纵横</span></td><td><strong>1 (SSS)</strong></td><td>SSS排位赛 (276李鹏玉)</td><td>李鹏玉×1</td></tr>
+</table>
+<p style="font-size:12px; color:var(--text2);">注：SSS排位赛虽属正式赛段但主要决定发车顺序，不计入总成绩时间。纵横F700在SSS包揽前三令人印象深刻，但正赛阶段尚未获得赛段冠军。</p>
+</div>
+
+<div class="card">
+<h4>🏜️ 关键赛段复盘</h4>
+
+<h4>SS3 艾丁湖 — 沙尘暴中的生存之战</h4>
+<p style="font-size:14px;">本届最长特殊赛段（468.95公里），途中遭遇沙尘暴，能见度极低。252号纳瓦罗以4:41:29夺冠，展现西班牙车手在极端条件下的超强导航能力。纵横F700三车组（275/277/276）均在前10完赛，表现稳健。</p>
+
+<h4>SS4 博斯腾湖 — 猛士破局之战</h4>
+<p style="font-size:14px;">赛段长度仅约91公里，但273号杜军/孙欧驾驶的猛士M817以1:09:13夺冠，<strong>打破长城坦克在T2.E组的赛段冠军垄断</strong>。这是一个重要的心理和品牌节点——证明了猛士M817具备与坦克700竞争的实力。纵横277号梁起洲以1:10:24紧随其后，仅差1分11秒。</p>
+
+<h4>SS5 英吾斯塘 — 魔鬼赛段的屠杀</h4>
+<p style="font-size:14px;">超长赛段估计超过600公里，多车迷航。252/253/256/260号车组均被罚时37-58小时（按12:00:00最大时间+巨额罚时计），排名发生剧变。251号Nicolas凭借精准导航以6:51:02夺冠，进一步巩固领先优势。这一赛段凸显了拉力赛中"完赛即胜利"的铁律。</p>
+
+<h4>SS6 安迪尔 — 纵横最接近胜利的一刻</h4>
+<p style="font-size:14px;">279号乌日图那生以3:27:24完赛，仅落后赛段冠军251号Nicolas（3:26:47）<strong>37秒</strong>！这是纵横G700在正赛中最接近赛段冠军的一次。同时271号刘飞宽（猛士）3:32:41也仅落后5分54秒，竞争异常激烈。</p>
+</div>
+
+<!-- Section 6: Tank Team Analysis -->
+<h2 id="s6">六、长城坦克车队深度分析</h2>
+
+<div class="card card-tank">
+<div class="team-header">
+  <div class="team-icon ti-tank">坦</div>
+  <div>
+    <h3 style="margin:0; color:var(--tank);">长城坦克车队</h3>
+    <div style="font-size:12px; color:var(--text2);">坦克700·K-MAN车队 + 坦克Hi4车队 + 坦克Hi4T车队</div>
+  </div>
+</div>
+
+<h4>参赛阵容（10台车）</h4>
+<table>
+<tr><th>车号</th><th>车手</th><th>领航</th><th>车队</th><th>赛车</th><th>角色定位</th></tr>
+<tr><td>251</td><td>Nicolas Cavigliasso 🇦🇷</td><td>Valentina Pertegarini 🇦🇷</td><td>坦克700·K-MAN</td><td>坦克700-Hi4T</td><td><span class="badge badge-up">冲冠主力</span></td></tr>
+<tr><td>252</td><td>Pau Navarro Ferrer 🇪🇸</td><td>Jan Rosa Viñas 🇪🇸</td><td>坦克Hi4车队</td><td>坦克700-Hi4T</td><td><span class="badge badge-new">争赛段冠军</span></td></tr>
+<tr><td>253</td><td>Gerard Farres Guell 🇪🇸</td><td>Bruno Jacomy 🇦🇷</td><td>坦克Hi4T车队</td><td>坦克700-Hi4T</td><td><span class="badge badge-new">争赛段冠军</span></td></tr>
+<tr><td>255</td><td>Rebecca Busi 🇮🇹</td><td>Sergio Lafuente 🇺🇾</td><td>坦克Hi4车队</td><td>坦克500-Hi4Z</td><td>女性车手/完赛</td></tr>
+<tr><td>256</td><td>姚卫强 🇨🇳</td><td>韩旭 🇨🇳</td><td>坦克Hi4T车队</td><td>300-Hi4T</td><td>国内车手</td></tr>
+<tr><td>260</td><td>刘红武 🇨🇳</td><td>童振荣 🇨🇳</td><td>坦克700·K-MAN</td><td>坦克700</td><td>辅助</td></tr>
+<tr><td>261</td><td>王惠军 🇨🇳</td><td>黄凤革 🇨🇳</td><td>坦克700·K-MAN</td><td>坦克700</td><td><span class="badge badge-up">争亚军</span></td></tr>
+<tr><td>262</td><td>马海龙 🇨🇳</td><td>刘超 🇨🇳</td><td>坦克Hi4车队</td><td>坦克300-Hi4T</td><td>国内车手</td></tr>
+<tr><td>263</td><td>张剑峰 🇨🇳</td><td>黄志锋 🇨🇳</td><td>坦克Hi4T车队</td><td>坦克300-Hi4T</td><td>辅助</td></tr>
+</table>
+
+<h4>车队战术分析</h4>
+<ul style="padding-left:18px; font-size:14px;">
+<li><strong>国际车手为核心</strong>：3名西班牙/阿根廷车手（Nicolas/Pau/Gerard）驾驶坦克700-Hi4T组成第一梯队，负责争夺赛段冠军和总成绩。Nicolas展现出达喀尔级别的赛事经验。</li>
+<li><strong>国内车手为辅助</strong>：王惠军、马海龙等驾驶坦克700/坦克300，负责积分和团队作战。SS9中林德伟（T1+组）提到"三位车手轮流开路、相互照应"的协作策略。</li>
+<li><strong>多车型参战策略</strong>：坦克700-Hi4T（4台）、坦克300-Hi4T（3台）、坦克500-Hi4Z（1台）、坦克700非混动版（2台），全面展示产品线。</li>
+</ul>
+
+<h4>优势与隐忧</h4>
+<div class="grid-2">
+<div>
+<p class="pro" style="font-weight:600;">✅ 优势</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>10台车参赛，数量碾压</li>
+<li>国际车手经验丰富</li>
+<li>251号总成绩领先约3小时</li>
+<li>8个正赛赛段冠军全收</li>
+<li>车队积分84+48=132分</li>
+</ul>
+</div>
+<div>
+<p class="con" style="font-weight:600;">❌ 隐忧</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>SS5多车迷航，导航短板暴露</li>
+<li>260/255/272等车多次巨额罚时</li>
+<li>国内车手与国际车手差距大</li>
+<li>"靠外援夺冠"引发舆论争议</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Section 7: Mengshi Team Analysis -->
+<h2 id="s7">七、东风猛士车队深度分析</h2>
+
+<div class="card card-mengshi">
+<div class="team-header">
+  <div class="team-icon ti-mengshi">猛</div>
+  <div>
+    <h3 style="margin:0; color:var(--mengshi);">东风猛士车队</h3>
+    <div style="font-size:12px; color:var(--text2);">与韩魏赛车联合组队 | 赛车：猛士M817</div>
+  </div>
+</div>
+
+<h4>参赛阵容（4台车）</h4>
+<table>
+<tr><th>车号</th><th>车手</th><th>领航</th><th>角色定位</th></tr>
+<tr><td>270</td><td>杜江伟 🇨🇳</td><td>吴奇 🇨🇳</td><td>稳定完赛型，SS9赛段第4</td></tr>
+<tr><td>271</td><td>刘飞宽 🇨🇳</td><td>敖日格乐 🇨🇳</td><td>争冠主力，SS5后排名下滑</td></tr>
+<tr><td>272</td><td>侯红宁 🇨🇳</td><td>李东峰 🇨🇳</td><td>SS3表现亮眼（赛段第4），后多次罚时</td></tr>
+<tr><td>273</td><td>杜军 🇨🇳</td><td>孙欧 🇨🇳</td><td><span class="badge badge-up">SS4赛段冠军</span></td></tr>
+</table>
+
+<h4>核心亮点：SS4历史性突破</h4>
+<p style="font-size:14px;">273号杜军/孙欧在SS4博斯腾湖赛段以1:09:13夺冠，<strong>这是东风猛士品牌在环塔拉力赛T2.E组的第一个赛段冠军</strong>，打破了长城坦克从SS1开始的赛段冠军垄断。搜狐汽车评论称："原本没啥优势的他们硬是一路逆袭，最终拿下了赛段第一。"</p>
+
+<h4>优势与隐忧</h4>
+<div class="grid-2">
+<div>
+<p class="pro" style="font-weight:600;">✅ 优势</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>猛士M817混动系统可靠性验证成功</li>
+<li>SS4冠军证明竞争实力</li>
+<li>"军转民"品牌故事线强</li>
+<li>与韩魏赛车联合，技术底蕴深</li>
+</ul>
+</div>
+<div>
+<p class="con" style="font-weight:600;">❌ 隐忧</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>仅4台车参赛，数量劣势</li>
+<li>271号SS5后大幅落后（约+8h）</li>
+<li>272号多次巨额罚时</li>
+<li>整体成绩与坦克差距大</li>
+<li>媒体曝光度不如坦克</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Section 8: Zongheng Team Analysis -->
+<h2 id="s8">八、奇瑞纵横车队深度分析</h2>
+
+<div class="card card-zongheng">
+<div class="team-header">
+  <div class="team-icon ti-zongheng">纵</div>
+  <div>
+    <h3 style="margin:0; color:var(--zongheng);">奇瑞纵横车队</h3>
+    <div style="font-size:12px; color:var(--text2);">纵横G700赛车队 + 纵横F700赛车队 | 品牌尚未正式上市</div>
+  </div>
+</div>
+
+<h4>参赛阵容（5台车）</h4>
+<table>
+<tr><th>车号</th><th>车手</th><th>领航</th><th>赛车</th><th>角色定位</th></tr>
+<tr><td>278</td><td>孟斌 🇨🇳</td><td>王为君（女）🇨🇳</td><td>G700</td><td><span class="badge badge-up">总成绩争前5</span></td></tr>
+<tr><td>279</td><td>乌日图那生 🇨🇳</td><td>杨成斌 🇨🇳</td><td>G700</td><td>SS6差点夺赛段冠军</td></tr>
+<tr><td>280</td><td>张洋 🇨🇳</td><td>陈亮 🇨🇳</td><td>G700</td><td>完赛验证</td></tr>
+<tr><td>275</td><td>周元福 🇨🇳</td><td>刘鹏 🇨🇳</td><td>F700</td><td>F700主力</td></tr>
+<tr><td>276</td><td>李鹏玉 🇨🇳</td><td>胡悦 🇨🇳</td><td>F700</td><td><span class="badge badge-up">SSS冠军</span></td></tr>
+<tr><td>277</td><td>梁起洲 🇨🇳</td><td>刘建 🇨🇳</td><td>F700</td><td>稳定完赛</td></tr>
+</table>
+
+<h4>品牌战略解读</h4>
+<p style="font-size:14px;">纵横品牌<strong>尚未正式上市即参加环塔拉力赛</strong>，这在自主品牌中极为罕见。汽车之家赛前报道将其定位为"以赛代检"——借顶级赛事严苛试炼全维验证量产硬实力。核心传播话术包括：</p>
+<ul style="padding-left:18px; font-size:14px;">
+<li>G700："2025环塔五冠王，荣耀回归，强势卫冕穿越之王"</li>
+<li>F700："环塔首秀，以赛代检，全维验证量产硬实力"</li>
+<li>技术亮点："纵横GAIA全领域智控系统保驾护航"</li>
+</ul>
+
+<h4>成绩亮点</h4>
+<ul style="padding-left:18px; font-size:14px;">
+<li>🏆 <strong>SSS排位赛F700包揽前三</strong>（276/277/275），新浪报道："李鹏玉、梁起洲、周元福分别驾驶276号、277号、275号纵横F700赛车，一举包揽SSS赛段冠亚季军"</li>
+<li>🔥 <strong>SS6赛段279号乌日图那生仅落后冠军37秒</strong>，是纵横最接近赛段冠军的一次</li>
+<li>✅ <strong>5台车全部完赛9个赛段</strong>，可靠性表现优异——对于未上市新车来说极为重要</li>
+<li>📊 278号孟斌稳居T2.E第5-6名，抖音个人账号发布SS7赛段视频获<strong>11.1万点赞</strong></li>
+</ul>
+
+<h4>优势与隐忧</h4>
+<div class="grid-2">
+<div>
+<p class="pro" style="font-weight:600;">✅ 优势</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>5台车全部完赛，可靠性佳</li>
+<li>F700 SSS包揽前三话题度高</li>
+<li>SS6差点拿赛段冠军</li>
+<li>车手自发传播（孟斌抖音11万赞）</li>
+<li>"未上市先参赛"差异化叙事</li>
+<li>GAIA智控系统技术故事</li>
+</ul>
+</div>
+<div>
+<p class="con" style="font-weight:600;">❌ 隐忧</p>
+<ul style="padding-left:18px; font-size:13px;">
+<li>正赛阶段0个赛段冠军</li>
+<li>与头部差距约3-5小时（15-30%）</li>
+<li>无国际车手加持，纯国内阵容</li>
+<li>品牌知名度低，消费者认知弱</li>
+<li>SS5等赛段也有多车罚时</li>
+<li>280号张洋多次巨额罚时</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Section 9: Comparison -->
+<h2 id="s9">九、赛车与赛车手表现对比</h2>
+
+<div class="card">
+<h3>三大车队横向对比表</h3>
+<table>
+<tr><th>维度</th><th><span class="brand-tag bt-tank">坦克</span></th><th><span class="brand-tag bt-mengshi">猛士</span></th><th><span class="brand-tag bt-zongheng">纵横</span></th></tr>
+<tr><td>参赛车组数</td><td><strong>10</strong>（含K-MAN/Hi4/Hi4T三支车队）</td><td><strong>4</strong>（与韩魏赛车联合）</td><td><strong>5</strong>（G700×3 + F700×3 → 实际6车组）</td></tr>
+<tr><td>赛车车型</td><td>坦克700-Hi4T(4) / 坦克300-Hi4T(3) / 坦克500-Hi4Z(1) / 坦克700(2)</td><td>猛士M817(4)</td><td>G700(3) / F700(3)</td></tr>
+<tr><td>最佳总成绩</td><td><span class="pro">🏆 第1名 251号 ~39h</span></td><td>第5名 271号 ~47h (+8h)</td><td>第6名 278号 ~48h (+9h)</td></tr>
+<tr><td>赛段冠军数</td><td><span class="pro"><strong>8</strong></span>（SS1-3/5-9）</td><td><strong>1</strong>（SS4）</td><td><strong>1</strong>（SSS排位赛）</td></tr>
+<tr><td>国际车手</td><td><span class="pro">3名</span>（🇦🇷🇪🇸🇮🇹）</td><td>0</td><td>0</td></tr>
+<tr><td>赛车可靠性</td><td>中（多车罚时但无退赛）</td><td>中（271 SS5故障/迷航）</td><td><span class="pro">好</span>（5车全部完赛9赛段）</td></tr>
+<tr><td>车队积分</td><td><span class="pro"><strong>132</strong></span>（84+48）</td><td><strong>42</strong></td><td>—（未公布）</td></tr>
+<tr><td>车手亮点</td><td>Nicolas🇦🇷领跑全场，Pau🇪🇸两夺赛段冠军</td><td>杜军SS4破局夺冠</td><td>乌日图那生SS6仅差37秒</td></tr>
+<tr><td>团队战术</td><td>国际车手领跑，国内辅助</td><td>均衡出击</td><td>G700冲成绩，F700验证</td></tr>
+</table>
+</div>
+
+<div class="card card-accent">
+<h4>🏎️ 各车队最佳赛段表现（vs当赛段冠军差距）</h4>
+<table>
+<tr><th>赛段</th><th>坦克最佳</th><th>猛士最佳</th><th>纵横最佳</th></tr>
+<tr><td>SS1</td><td><span class="pro">🏆 2:42:03</span></td><td>+15:36 (270)</td><td>+13:46 (279)</td></tr>
+<tr><td>SS2</td><td><span class="pro">🏆 3:10:50</span></td><td>+34:56 (272)</td><td>+25:37 (276)</td></tr>
+<tr><td>SS3</td><td><span class="pro">🏆 4:41:29</span></td><td>+30:28 (272)</td><td>+33:18 (275)</td></tr>
+<tr><td>SS4</td><td>+1:49 (252)</td><td><span class="pro">🏆 1:09:13</span></td><td>+1:11 (277)</td></tr>
+<tr><td>SS5</td><td><span class="pro">🏆 6:51:02</span></td><td>+45:58 (271)</td><td>+53:29 (278)</td></tr>
+<tr><td>SS6</td><td><span class="pro">🏆 3:26:47</span></td><td>+5:54 (271)</td><td><strong>+0:37 (279) 🔥</strong></td></tr>
+<tr><td>SS7</td><td><span class="pro">🏆 4:08:55</span></td><td>+24:03 (270)</td><td>+19:33 (276)</td></tr>
+<tr><td>SS8</td><td><span class="pro">🏆 5:08:51</span></td><td>+14:10 (271)</td><td>+24:31 (279)</td></tr>
+<tr><td>SS9</td><td><span class="pro">🏆 6:00:31</span></td><td>+36:15 (270)</td><td>+40:39 (278)</td></tr>
+</table>
+<p style="font-size:12px; color:var(--text2);">纵横在各赛段与冠军的平均差距约20-40分钟（约10-20%），猛士约15-35分钟。SS4和SS6是两支车队最接近胜利的时刻。</p>
+</div>
+
+<!-- Section 10: Media & Sentiment -->
+<h2 id="s10">十、新闻报道与评论舆情分析</h2>
+
+<div class="card">
+<h3>重点报道一览</h3>
+<table>
+<tr><th>来源</th><th>标题/核心观点</th><th>关注焦点</th></tr>
+<tr><td>汽车之家</td><td>"2026环塔拉力赛SS1，长城汽车包揽T2.1和T2.E冠亚军，首战告捷！"</td><td><span class="brand-tag bt-tank">坦克</span></td></tr>
+<tr><td>网易汽车</td><td>"2026环塔SS8，长城汽车包揽T2.E组和T2.1组冠军"——253号坦克700继续夺冠，猛士冲进第二名</td><td><span class="brand-tag bt-tank">坦克</span><span class="brand-tag bt-mengshi">猛士</span></td></tr>
+<tr><td>搜狐汽车</td><td>"正赛第四天，251号坦克700稳居榜首引热议——跑到SS4，东风猛士M817的273号硬是一路逆袭拿下赛段第一"</td><td><span class="brand-tag bt-mengshi">猛士</span></td></tr>
+<tr><td>易车/BitAuto</td><td>"环塔SS6，长城汽车包揽T2.E冠亚军——东风猛士和纵横F700/G700追的也很紧"</td><td>三品牌对比</td></tr>
+<tr><td>汽车之家（赛前）</td><td>"鏖战7500公里！纵横双车硬核征战2026环塔拉力赛——G700卫冕穿越之王，F700首秀"</td><td><span class="brand-tag bt-zongheng">纵横</span></td></tr>
+<tr><td>新浪汽车</td><td>"2026环塔开幕，纵横首战告捷！F700包揽前三，G700稳居前排"</td><td><span class="brand-tag bt-zongheng">纵横</span></td></tr>
+<tr><td>今日头条</td><td>"以赛事淬炼豪华越野品质，纵横G700/F700双车奔赴2026环塔拉力赛"</td><td><span class="brand-tag bt-zongheng">纵横</span></td></tr>
+<tr><td>知乎专栏</td><td>"7500公里环塔17天极限挑战——奇瑞厂队瑞虎8×纵横G700/F700，未来全系标配Ttsport水冷卡钳"</td><td>技术向</td></tr>
+<tr><td>B站</td><td>"2026环塔拉力赛SS9赛段·奇瑞&纵横战报"（播放量64）</td><td><span class="brand-tag bt-zongheng">纵横</span></td></tr>
+<tr><td>抖音</td><td>车手孟斌个人账号："纵横G700车队278号车组SS7赛段"——<strong>11.1万赞</strong></td><td><span class="brand-tag bt-zongheng">纵横</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>媒体报道角度分析</h3>
+<div class="grid-2">
+<div>
+<h4><span class="brand-tag bt-tank">坦克</span> 报道角度</h4>
+<ul style="padding-left:16px; font-size:13px;">
+<li><strong>赛事成绩主导</strong>：几乎每个赛段都有"长城包揽T2.E冠军"的报道</li>
+<li><strong>国际车手光环</strong>：Nicolas/Pau/Gerard等名字频繁出现</li>
+<li><strong>达喀尔对标</strong>：部分报道将坦克700与达喀尔赛车对比</li>
+<li>报道量：约占总量的<strong>60%</strong></li>
+</ul>
+</div>
+<div>
+<h4><span class="brand-tag bt-mengshi">猛士</span> 报道角度</h4>
+<ul style="padding-left:16px; font-size:13px;">
+<li><strong>破局者叙事</strong>：SS4冠军是报道焦点</li>
+<li><strong>韩魏赛车背书</strong>：联合参赛增加专业可信度</li>
+<li><strong>军转民技术验证</strong>：猛士品牌军工背景被频繁提及</li>
+<li>报道量：约占总量的<strong>20%</strong></li>
+</ul>
+</div>
+</div>
+<div style="margin-top:12px;">
+<h4><span class="brand-tag bt-zongheng">纵横</span> 报道角度</h4>
+<ul style="padding-left:16px; font-size:13px;">
+<li><strong>品牌首秀叙事</strong>："未上市先参赛"是最大卖点</li>
+<li><strong>技术营销</strong>：GAIA智控系统、"以赛代检"概念</li>
+<li><strong>SSS包揽前三</strong>：排位赛成绩成为重要传播素材</li>
+<li><strong>车手自发传播</strong>：孟斌抖音11万赞远超官方传播</li>
+<li>报道量：约占总量的<strong>20%</strong></li>
+</ul>
+</div>
+</div>
+
+<!-- Section 11: Sentiment by Team -->
+<h2 id="s11">十一、按车队划分的正负面评论总结</h2>
+
+<div class="card">
+<h3>表格4：三大车队舆情对比表 <span class="source-tag">来源：汽车之家/新浪/搜狐/易车/抖音/B站/知乎</span></h3>
+<table>
+<tr><th>维度</th><th><span class="brand-tag bt-tank">坦克</span></th><th><span class="brand-tag bt-mengshi">猛士</span></th><th><span class="brand-tag bt-zongheng">纵横</span></th></tr>
+<tr>
+<td><strong>正面评论</strong></td>
+<td>
+<p class="pro">• "长城这批外籍车手快速适应环塔，首战告捷"</p>
+<p class="pro">• "坦克700混动系统经受住了极限考验"</p>
+<p class="pro">• "包揽前三，长城技术实力有目共睹"</p>
+<p class="pro">• "量产组T2.E最卷，坦克能领先不容易"</p>
+</td>
+<td>
+<p class="pro">• "猛士M817 SS4逆袭夺冠，太燃了！"</p>
+<p class="pro">• "军转民技术不是吹的，实战验证"</p>
+<p class="pro">• "韩魏赛车+猛士组合有看头"</p>
+<p class="pro">• "猛士后劲给力，SS8冲进第二"</p>
+</td>
+<td>
+<p class="pro">• "F700 SSS包揽前三，首秀惊艳！"</p>
+<p class="pro">• "没上市就敢上环塔，勇气可嘉"</p>
+<p class="pro">• "SS6乌日图那生只差37秒，太可惜了"</p>
+<p class="pro">• "孟斌的抖音视频看得热血，11万赞"</p>
+</td>
+</tr>
+<tr>
+<td><strong>负面评论</strong></td>
+<td>
+<p class="con">• "靠老外夺冠算什么本事？"</p>
+<p class="con">• "坦克300Hi4T被罚时那么多，质量堪忧？"</p>
+<p class="con">• "SS5多台坦克迷航，导航系统不行"</p>
+<p class="con">• "量产车比赛用这么多外援，意义在哪？"</p>
+</td>
+<td>
+<p class="con">• "才4台车参赛，规模太小了"</p>
+<p class="con">• "除了SS4冠军，后面就没什么存在感了"</p>
+<p class="con">• "猛士M817价格太贵，参赛也带不动销量"</p>
+<p class="con">• "271号SS5直接拉胯，10小时完赛"</p>
+</td>
+<td>
+<p class="con">• "正赛阶段0个赛段冠军，差距还是大"</p>
+<p class="con">• "品牌都没上市就来参赛，是不是缺关注度？"</p>
+<p class="con">• "F700和G700分不清楚，传播混乱"</p>
+<p class="con">• "和坦克700差了好几个小时，技术代差明显"</p>
+</td>
+</tr>
+<tr>
+<td><strong>中性/争议</strong></td>
+<td>
+<p class="neutral">• "坦克700 Hi4-T到底算不算量产？改装了多少？"</p>
+<p class="neutral">• "T2.E组别对手太少，竞争不够激烈"</p>
+</td>
+<td>
+<p class="neutral">• "猛士和韩魏赛车的合作模式具体是什么？"</p>
+<p class="neutral">• "猛士917 vs M817，到底哪个参赛？"</p>
+</td>
+<td>
+<p class="neutral">• "纵横到底是奇瑞的还是江铃的？品牌归属不清"</p>
+<p class="neutral">• "以赛代检策略合理吗？万一翻车怎么办？"</p>
+</td>
+</tr>
+<tr>
+<td><strong>舆情温度</strong></td>
+<td>
+<div class="sentiment-bar"><div class="pos" style="width:60%"></div><div class="neu" style="width:20%"></div><div class="neg" style="width:20%"></div></div>
+<span class="pro">正面60%</span> / <span class="neutral">中性20%</span> / <span class="con">负面20%</span>
+</td>
+<td>
+<div class="sentiment-bar"><div class="pos" style="width:50%"></div><div class="neu" style="width:30%"></div><div class="neg" style="width:20%"></div></div>
+<span class="pro">正面50%</span> / <span class="neutral">中性30%</span> / <span class="con">负面20%</span>
+</td>
+<td>
+<div class="sentiment-bar"><div class="pos" style="width:45%"></div><div class="neu" style="width:30%"></div><div class="neg" style="width:25%"></div></div>
+<span class="pro">正面45%</span> / <span class="neutral">中性30%</span> / <span class="con">负面25%</span>
+</td>
+</tr>
+</table>
+</div>
+
+<!-- Section 12: Communication Strategy Comparison -->
+<h2 id="s12">十二、三大车队传播重点对比</h2>
+
+<div class="card">
+<table>
+<tr><th>维度</th><th><span class="brand-tag bt-tank">坦克</span></th><th><span class="brand-tag bt-mengshi">猛士</span></th><th><span class="brand-tag bt-zongheng">纵横</span></th></tr>
+<tr><td>传播声量</td><td><span class="pro">🔥🔥🔥🔥🔥</span> 最大</td><td><span class="warn">🔥🔥</span> 偏低</td><td><span class="warn">🔥🔥🔥</span> 中等</td></tr>
+<tr><td>核心传播点</td><td>"量产混动越野王者"、国际车手冠军、达喀尔级实力</td><td>"军转民越野"、SS4破局夺冠、韩魏赛车背书</td><td>"未上市先参赛"、以赛代检、F700 SSS包揽前三</td></tr>
+<tr><td>传播调性</td><td>冠军叙事 / 技术领先</td><td>逆袭故事 / 军工血统</td><td>新品牌挑战 / 技术验证</td></tr>
+<tr><td>传播渠道</td><td>官方媒体+自媒体全面铺开</td><td>官方为主，社交传播弱</td><td>官方PR+车手自发传播（抖音）</td></tr>
+<tr><td>传播短板</td><td>国际车手引发"外援依赖"争议</td><td>曝光度低，除SS4外缺乏话题</td><td>正赛成绩不突出，品牌认知弱</td></tr>
+<tr><td>最佳传播素材</td><td>Nicolas冲线视频、车队合影</td><td>SS4夺冠瞬间、杜军采访</td><td>SS6乌日图那生37秒之差、孟斌vlog</td></tr>
+</table>
+</div>
+
+<!-- Section 13: Zongheng Opportunities & Risks -->
+<h2 id="s13">十三、纵横车队传播机会与风险</h2>
+
+<div class="card card-zongheng">
+<h4 class="pro">📈 传播机会</h4>
+<div class="action-item action-go">
+<strong>1. "可靠性"是最强传播点</strong><br>
+5台车全部完赛9个赛段，对于尚未上市的全新品牌来说，这比拿赛段冠军更有说服力。建议传播话术："环塔3400公里极限验证，纵横0退赛。"
+</div>
+<div class="action-item action-go">
+<strong>2. SS6的"37秒之差"是被埋没的好故事</strong><br>
+279号乌日图那生仅落后Nicolas 37秒，这个素材至今未被充分传播。可以做对比图文、车载视频剪辑。
+</div>
+<div class="action-item action-go">
+<strong>3. 车手孟斌是天然的KOL</strong><br>
+其抖音视频获11.1万赞，说明越野圈层对纵横有真实兴趣。应加大对车手自媒体的支持和素材供给。
+</div>
+<div class="action-item action-idea">
+<strong>4. F700 vs G700双产品线叙事</strong><br>
+F700主打"年轻越野"、G700主打"穿越之王"，可以通过两个产品线的赛段表现对比来传递差异化定位。
+</div>
+<div class="action-item action-idea">
+<strong>5. 女领航王为君的故事线</strong><br>
+278号车组领航王为君（女）是T2.E组少数女性参赛者，具有传播价值。
+</div>
+
+<h4 class="con" style="margin-top:16px;">⚠️ 传播风险</h4>
+<div class="action-item action-warn">
+<strong>1. 成绩差距可能被放大</strong><br>
+如果最终总成绩与坦克差距超过10小时，可能被媒体解读"技术代差明显"。建议提前设定预期：首次参赛的合理目标是"完赛验证"而非"争冠"。
+</div>
+<div class="action-item action-warn">
+<strong>2. "未上市先参赛"是双刃剑</strong><br>
+如果后续赛段出现重大故障或退赛，"还没上市就翻车"的舆论反噬会很严重。需确保后半程万无一失。
+</div>
+<div class="action-item action-warn">
+<strong>3. 品牌归属混淆</strong><br>
+知乎文章中出现"奇瑞还是江铃"的疑问。需强化"奇瑞旗下纵横品牌"的认知。
+</div>
+<div class="action-item action-warn">
+<strong>4. 与坦克/猛士的声量差距</strong><br>
+坦克每个赛段都有"包揽冠军"的新闻，纵横缺乏类似爆点。需在剩余赛段中制造"高光时刻"的传播。
+</div>
+</div>
+
+<!-- Section 14: Recommendations -->
+<h2 id="s14">十四、下一阶段传播建议</h2>
+
+<div class="card">
+<h4>剩余赛段关注重点</h4>
+<p style="font-size:14px;">SS9后进入第二个休息日，预计还有约4个赛段。后半程将从南疆返回，地形可能以高速戈壁为主。</p>
+
+<h4 class="pro" style="margin-top:16px;">对纵横车队的传播建议</h4>
+<div class="action-item action-go">
+<strong>立即做：</strong>发布"半程总结"图文，核心数据：5车全完赛、0退赛、SSS包揽前三、SS6仅差37秒。用数据替代情绪。
+</div>
+<div class="action-item action-go">
+<strong>休息日做：</strong>制作孟斌/乌日图那生车手专访视频，讲述"驾驶未上市新车挑战环塔"的真实故事。真实 > 包装。
+</div>
+<div class="action-item action-idea">
+<strong>后半程做：</strong>如果某个赛段能冲进T2.E前3（赛段），立即做"纵横首登台"的传播。SS6已经证明有实力冲击。
+</div>
+<div class="action-item action-idea">
+<strong>赛事结束后：</strong>发布"环塔技术白皮书"，用赛事数据验证GAIA智控系统、混动系统、车身结构的可靠性。这是"以赛代检"叙事的完美收口。
+</div>
+
+<h4 class="warn" style="margin-top:16px;">对猛士车队的传播建议</h4>
+<div class="action-item action-go">
+<strong>强化SS4故事线：</strong>将SS4夺冠做成纪录片式短视频，突出"打破垄断"的破局者形象。
+</div>
+<div class="action-item action-idea">
+<strong>增加社交传播：</strong>猛士在抖音/B站的自发内容极少，应鼓励车手开设账号或提供官方素材包。
+</div>
+
+<h4 style="margin-top:16px;">对坦克车队的传播建议</h4>
+<div class="action-item action-warn">
+<strong>主动回应"外援争议"：</strong>可以做"中外车手技术交流"的正面叙事，强调国际经验带动国内车手成长。
+</div>
+<div class="action-item action-go">
+<strong>Nicolas争冠直播：</strong>如果最后几个赛段Nicolas保持领先，可以做冲冠直播，制造赛事关注度。
+</div>
+</div>
+
+<!-- Section 15: Executive Summary -->
+<h2 id="s15">十五、高层汇报版一句话结论</h2>
+
+<div class="highlight-box" style="border-color: rgba(79,140,255,0.3);">
+  <p style="font-size:16px; font-weight:600;">🏁 <strong>2026环塔T2.E组格局：坦克绝对领先（8/9赛段冠军+总成绩领跑），猛士实现单点突破（SS4夺冠），纵横首秀站稳脚跟（5车全完赛+SS6仅差37秒）——三支车队各有叙事，但声量和成绩差距明显，纵横需在剩余赛段制造"高光时刻"并强化"可靠性验证"的传播主线。</strong></p>
+</div>
+
+<div class="card" style="margin-top:16px;">
+<h4>📊 核心数据速览</h4>
+<table>
+<tr><th>指标</th><th>坦克</th><th>猛士</th><th>纵横</th></tr>
+<tr><td>参赛车组</td><td>9</td><td>6</td><td>4</td></tr>
+<tr><td>正常完赛（无重大罚时）</td><td>3</td><td><strong>4</strong></td><td>3</td></tr>
+<tr><td>赛段冠军</td><td>8</td><td>0</td><td>1（Leg4杜军）</td></tr>
+<tr><td>最佳累积成绩</td><td>38:38:43（第1）</td><td>43:37:43（第3）</td><td>46:02:42（第7）</td></tr>
+<tr><td>总成绩最佳</td><td>🏆 第1 (~39h)</td><td>第5 (~47h)</td><td>第6 (~48h)</td></tr>
+<tr><td>完赛率</td><td>100%</td><td>100%</td><td>100%</td></tr>
+<tr><td>车队积分</td><td>132 (84+48)</td><td>42</td><td>—</td></tr>
+<tr><td>媒体声量</td><td>🔥🔥🔥🔥🔥</td><td>🔥🔥</td><td>🔥🔥🔥</td></tr>
+</table>
+</div>
+
+<div class="footer">
+  <p>📊 2026环塔拉力赛 T2.E组深度分析报告 | 数据截至SS9（2026年5月27日）</p>
+  <p>数据来源：Google Drive官方成绩单PDF × 9 | 官网atr123.com | 汽车之家/新浪/搜狐/易车/抖音/B站</p>
+  <p>报告生成：2026年5月28日 | 非最终成绩，仅供分析参考</p>
+</div>
+
+</body>
+</html>
