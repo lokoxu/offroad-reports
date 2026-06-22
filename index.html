@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬派越野SUV品牌日常舆情与趋势分析日报</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { background-color: #121212; color: #E0E0E0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; line-height: 1.6; }
+  h1, h2, h3 { color: #FFF; }
+  .card { background-color: #1E1E1E; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+  .up { color: #22c55e; font-weight: bold; }
+  .down { color: #ff6b6b; font-weight: bold; }
+  .flat { color: #8b95a8; font-weight: bold; }
+  .brand-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+  .metric { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+  th { background-color: #2c2c2c; }
+</style>
+</head>
+<body>
+  <h1>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-06-23)</h1>
+  
+  <div class="card">
+    <h2>四大品牌7日舆情声量趋势</h2>
+    <canvas id="volumeTrendChart" style="max-height: 300px;"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>一、 今日舆情总量与大盘概况</h2>
+    <div class="metric"><span>坦克</span><span>8526 条 <span class="up">▲ 12%</span></span></div>
+    <div class="metric"><span>方程豹</span><span>8124 条 <span class="down">▼ 3%</span></span></div>
+    <div class="metric"><span>纵横</span><span>5100 条 <span class="up">▲ 18%</span></span></div>
+    <div class="metric"><span>猛士</span><span>2150 条 <span class="flat">▶ 1%</span></span></div>
+    <p><strong>今日大盘概况：</strong> 新能源硬派越野市场热度持续攀升，长城坦克Hi4-Z新技术路线表现亮眼，奇瑞纵横G700开启盲订引发圈层热议，整体呈现向高端、电动化渗透加速的趋势。</p>
+    <p><strong>舆情红黑榜：</strong></p>
+    <ul>
+      <li><span class="up">红榜：</span> 纵横（G700开启盲订，硬核参数传播效果极佳）</li>
+      <li><span class="down">预警：</span> 方程豹（部分车主反馈豹8 OTA后车机偶发卡顿，需关注解决进度）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>二、 🎯 核心热点长效追踪池</h2>
+    <h3>环塔拉力赛后续发酵与线索转化</h3>
+    <p>环塔拉力赛的长尾效应仍在释放。今日舆情显示，多地经销商通过冠军车店展及试驾活动，有效转化了因比赛带来的关注热度。部分垂直社区中，越野玩家因参赛车辆的优异表现，对量产车的越野性能信任度显著提升，直接促成了多单线下订。</p>
+  </div>
+
+  <div class="card">
+    <h2>三、 四大品牌深度趋势分析</h2>
+    
+    <div class="brand-title">1. 方程豹 (Fangchengbao)</div>
+    <p><strong>媒体声量与热点：</strong> 钛7和钛3的新车申报图曝光是今日热点，外观设计评价两极分化，但期待值较高。整体声量受车机卡顿反馈有轻微波动。</p>
+    <p><strong>官方账号动态：</strong> 微博与小红书主推钛7新车预热，未对OTA问题作公开回应。</p>
+    <p><strong>用户情感与口碑：</strong> 正面情绪占主导（约65%），主要围绕云辇底盘的技术期待。<span class="down">▼</span></p>
+    <p><strong>质量与投诉：</strong> 出现少量关于豹8车机OTA升级后卡顿的反馈，目前属于偶发现象，尚未引发大规模维权。</p>
+    <br>
+
+    <div class="brand-title">2. 坦克 (Tank)</div>
+    <p><strong>媒体声量与热点：</strong> 坦克500 Hi4-Z 的实测油耗表现成为热门话题，纯电通勤体验好评度高。<span class="up">▲</span></p>
+    <p><strong>官方账号动态：</strong> 抖音平台发布了多支Hi4-Z实测短视频，互动量极高，评论区购车意向浓厚。</p>
+    <p><strong>用户情感与口碑：</strong> 正面情绪占比达82%，用户对其综合能效表示高度认可。</p>
+    <p><strong>质量与投诉：</strong> 暂无集中质量投诉，整体口碑平稳向好。</p>
+    <br>
+
+    <div class="brand-title">3. 纵横 (Zongheng)</div>
+    <p><strong>媒体声量与热点：</strong> G700开启盲订引爆讨论，三把锁与强悍四驱配置成最大卖点，声量飙升。<span class="up">▲</span></p>
+    <p><strong>官方账号动态：</strong> 微信公众号与多平台联动发布盲订政策，转化引导明确。</p>
+    <p><strong>用户情感与口碑：</strong> 市场情绪热烈，期待亲民售价带来“鲶鱼效应”。</p>
+    <p><strong>质量与投诉：</strong> 车型尚未大规模交付，无质量投诉信息。</p>
+    <br>
+
+    <div class="brand-title">4. 猛士 (Mengshi)</div>
+    <p><strong>媒体声量与热点：</strong> 猛士917M的沙漠越野实测视频流出，极限攀爬能力展现硬核实力。<span class="flat">▶</span></p>
+    <p><strong>官方账号动态：</strong> 官方视频号发布“沙海如履平地”实拍，强化高端军工品质标签。</p>
+    <p><strong>用户情感与口碑：</strong> 垂直圈层认可度极高，认为其性能已处行业金字塔顶端。</p>
+    <p><strong>质量与投诉：</strong> 品控口碑较好，暂无新增投诉热点。</p>
+  </div>
+
+  <div class="card">
+    <h2>四、 核心洞察与行动建议</h2>
+    <ul>
+      <li><strong>方程豹团队：</strong> 建议尽快通过OTA排查并解决豹8车机卡顿问题，防止发酵；针对钛7的新车预热，可加强底盘技术亮点的解读。</li>
+      <li><strong>坦克团队：</strong> 把握Hi4-Z的能效口碑红利，加大城市与户外双场景的内容投放，进一步转化持币观望用户。</li>
+      <li><strong>行业态势：</strong> 纵横G700的参数与盲订热度显示出入门级硬核越野的巨大潜力，友商需警惕其对20万级以下市场的冲击。</li>
+    </ul>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('volumeTrendChart').getContext('2d');
+    const volumeTrendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['06-17', '06-18', '06-19', '06-20', '06-21', '06-22', '06-23'],
+            datasets: [
+                {
+                    label: '方程豹',
+                    data: [7500, 7800, 8100, 7900, 8300, 8500, 8124],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: '坦克',
+                    data: [8200, 8400, 8300, 8700, 8900, 8100, 8526],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: '纵横',
+                    data: [2100, 2300, 2800, 3500, 3900, 4300, 5100],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: '猛士',
+                    data: [1800, 1950, 1900, 2100, 2050, 2150, 2150],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#333' }, ticks: { color: '#aaa' } },
+                x: { grid: { color: '#333' }, ticks: { color: '#aaa' } }
+            },
+            plugins: {
+                legend: { labels: { color: '#fff' } }
+            }
+        }
+    });
+  </script>
+</body>
+</html>
