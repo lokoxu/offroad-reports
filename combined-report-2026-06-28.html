@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>硬派越野SUV品牌日常舆情与趋势分析日报 - 2026-06-28</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .card {
+            background-color: #1E1E1E;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        h1, h2, h3 {
+            color: #FFFFFF;
+        }
+        .trend-up { color: #22c55e; font-weight: bold; }
+        .trend-down { color: #ff6b6b; font-weight: bold; }
+        .trend-flat { color: #8b95a8; font-weight: bold; }
+        .brand-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .brand-card {
+            background-color: #2C2C2C;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .brand-name { font-size: 1.2em; font-weight: bold; margin-bottom: 5px; }
+        .brand-vol { font-size: 1.5em; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>硬派越野SUV品牌日常舆情与趋势分析日报</h1>
+        <p style="color: #8b95a8;">发布日期: 2026-06-28</p>
+        
+        <div class="card">
+            <h2>📈 核心新增：可视化动态趋势图 (7天声量走势)</h2>
+            <canvas id="volumeTrendChart" style="max-height: 300px; width: 100%;"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>一、 今日舆情总量与大盘概况</h2>
+            <div class="brand-summary">
+                <div class="brand-card">
+                    <div class="brand-name">坦克</div>
+                    <div class="brand-vol">12,430</div>
+                    <div class="trend-up">▲ 1.88%</div>
+                </div>
+                <div class="brand-card">
+                    <div class="brand-name">方程豹</div>
+                    <div class="brand-vol">9,250</div>
+                    <div class="trend-up">▲ 5.11%</div>
+                </div>
+                <div class="brand-card">
+                    <div class="brand-name">纵横</div>
+                    <div class="brand-vol">5,120</div>
+                    <div class="trend-up">▲ 4.49%</div>
+                </div>
+                <div class="brand-card">
+                    <div class="brand-name">猛士</div>
+                    <div class="brand-vol">3,840</div>
+                    <div class="trend-up">▲ 3.78%</div>
+                </div>
+            </div>
+            <p><strong>大盘概况：</strong>今日硬派越野细分市场整体声量呈温和上涨态势，增程与插混技术路线的讨论依然是核心焦点。随着各品牌下半年新车型的预热（如方程豹钛7、坦克500 Hi4-Z等），用户期待值逐渐转化为社交媒体的讨论热度。越野拉力赛的后续长尾效应持续赋能各品牌线下转化。</p>
+            <p><strong>舆情红黑榜：</strong><br>
+            🏆 <strong>正面榜首：方程豹</strong> - 凭借钛7与钛3新车预热及云辇-P技术讨论，正面声量显著回升。<br>
+            ⚠️ <strong>负面预警：坦克 / 方程豹</strong> - 部分老车主关于车机OTA升级卡顿及充电减配的讨论需持续监控。</p>
+        </div>
+
+        <div class="card">
+            <h2>二、 🎯 核心热点长效追踪池：环塔拉力赛</h2>
+            <p><strong>追踪焦点：赛事后续发酵与线索转化</strong></p>
+            <p>根据历史数据交叉比对，环塔拉力赛的长尾效应依然显著：</p>
+            <ul>
+                <li><span class="trend-flat">▶</span> <strong>门店客流转化：</strong> 社区中关于“因为环塔成绩去试驾212/坦克”的帖子累计声量约 1,200 条，重点城市（北京、成都）经销商反映赛车展示带来了近 15% 的进店客流增量。</li>
+                <li><span class="trend-up">▲</span> <strong>技术下放讨论：</strong> 用户对于越野赛车技术（如底盘调校、差速锁）量产下放的讨论热度上升，成为影响购买决策的关键加分项。</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>三、 四大品牌深度趋势分析</h2>
+            
+            <h3>1. 坦克 (Tank) <span class="trend-up">▲</span></h3>
+            <ul>
+                <li><strong>媒体声量与热点：</strong> 坦克500 Hi4-Z 的续航表现与坦克700 Hi4-T的口碑持续发酵，越野版坦克300依然是基石。</li>
+                <li><strong>官方策略：</strong> 抖音/小红书侧重于车主越野生活方式的展示，增强了社区凝聚力。</li>
+                <li><strong>用户情绪：</strong> 正面口碑稳固（占82%），但在部分复杂越野场景下的油耗问题有零星吐槽。</li>
+            </ul>
+
+            <h3>2. 方程豹 (Fangchengbao) <span class="trend-up">▲</span></h3>
+            <ul>
+                <li><strong>媒体声量与热点：</strong> 钛7、钛3 新车谍照和尺寸对标中大型SUV的话题占据头条；豹8、豹5的乾崑智驾版讨论热烈。</li>
+                <li><strong>官方策略：</strong> 官微密集发布新车技术细节（如云辇技术下放），有效提振了科技越野标签。</li>
+                <li><strong>质量与投诉走势：</strong> 存在部分车主反映豹8升级OTA后车机偶发卡顿死机的现象 <span class="trend-down">▼</span>，虽未形成大面积危机，但需公关介入安抚。</li>
+            </ul>
+
+            <h3>3. 纵横 (Zongheng) <span class="trend-up">▲</span></h3>
+            <ul>
+                <li><strong>媒体声量与热点：</strong> 纵横G700与F700的设计及性价比是主要看点，奇瑞背书为其带来了稳定的关注度。</li>
+                <li><strong>用户情绪：</strong> 以观望和期待为主，负面声量极低，但缺乏爆款话题带动。</li>
+            </ul>
+
+            <h3>4. 猛士 (Mengshi) <span class="trend-flat">▶</span></h3>
+            <ul>
+                <li><strong>媒体声量与热点：</strong> 猛士917硬核越野实力与军工背景依然是核心卖点。</li>
+                <li><strong>用户情绪：</strong> 高端定位决定了其声量基数较小，但用户忠诚度和口碑极高。</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>四、 核心洞察与行动建议</h2>
+            <ul>
+                <li><strong>技术标签化：</strong> 各品牌需继续强化插混/增程在越野场景下的可靠性传播，打消消费者续航与电池安全疑虑。</li>
+                <li><strong>客情维护：</strong> 针对方程豹等品牌出现的 OTA 升级引发的车机卡顿问题，建议官方售后主动在核心论坛发布修复进度时间表，避免负面情绪发酵。</li>
+                <li><strong>赛事长尾：</strong> 建议将拉力赛冠军车在重点二线城市进行巡展，配合专属购车政策，加速长尾流量转化。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('volumeTrendChart').getContext('2d');
+        const volumeTrendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["06-22", "06-23", "06-24", "06-25", "06-26", "06-27", "06-28"],
+                datasets: [
+                    {
+                        label: '坦克',
+                        data: [11000, 11500, 11200, 11800, 12000, 12200, 12430],
+                        borderColor: '#ff6b6b',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '方程豹',
+                        data: [8100, 8300, 8900, 9500, 9100, 8800, 9250],
+                        borderColor: '#4dabf7',
+                        backgroundColor: 'rgba(77, 171, 247, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '纵横',
+                        data: [4500, 4800, 4700, 5000, 5200, 4900, 5120],
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '猛士',
+                        data: [3500, 3600, 3400, 3900, 3800, 3700, 3840],
+                        borderColor: '#f59f00',
+                        backgroundColor: 'rgba(245, 159, 0, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E0E0E0' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#8b95a8' },
+                        grid: { color: '#333' }
+                    },
+                    y: {
+                        ticks: { color: '#8b95a8' },
+                        grid: { color: '#333' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
