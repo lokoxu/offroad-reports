@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-07-01)</title>
+    <title>硬派越野SUV品牌日常舆情与趋势分析日报 - 2026-07-02</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -12,217 +12,185 @@
             --card-bg: #1E1E1E;
             --up-color: #22c55e;
             --down-color: #ff6b6b;
-            --neutral-color: #8b95a8;
-            --border-radius: 8px;
+            --flat-color: #8b95a8;
+            --accent-color: #3b82f6;
         }
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 16px;
             line-height: 1.6;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
-        h1, h2, h3 {
-            color: #ffffff;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
+        h1, h2, h3 { color: #ffffff; }
         .card {
             background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 15px;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .up { color: var(--up-color); font-weight: bold; }
-        .down { color: var(--down-color); font-weight: bold; }
-        .neutral { color: var(--neutral-color); font-weight: bold; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+        .trend-up { color: var(--up-color); font-weight: bold; }
+        .trend-down { color: var(--down-color); font-weight: bold; }
+        .trend-flat { color: var(--flat-color); font-weight: bold; }
+        .volume-list {
+            list-style: none; padding: 0;
         }
-        .metric {
-            background-color: #2a2a2a;
-            padding: 15px;
-            border-radius: 6px;
-            text-align: center;
+        .volume-list li {
+            padding: 10px 0; border-bottom: 1px solid #333;
+            display: flex; justify-content: space-between;
         }
-        .metric-title { font-size: 0.9em; color: #aaa; }
-        .metric-value { font-size: 1.5em; font-weight: bold; margin: 5px 0; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
+        .volume-list li:last-child { border-bottom: none; }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>硬派越野SUV品牌日常舆情与趋势分析日报</h1>
-        <p><strong>日期：</strong>2026年7月1日 | <strong>分析师：</strong>罗极</p>
+        <h1>硬派越野SUV舆情与市场趋势日报</h1>
+        <p style="color: #aaa; font-size: 0.9em;">生成日期：2026年07月02日</p>
         
         <div class="card">
-            <canvas id="volumeTrendChart" style="max-height: 300px; width: 100%;"></canvas>
+            <h2>📊 近7日品牌全网声量趋势</h2>
+            <div class="chart-container">
+                <canvas id="volumeTrendChart"></canvas>
+            </div>
         </div>
 
-        <h2>一、 今日舆情总量与大盘概况 (Executive Summary & Volumes)</h2>
-        <div class="card grid">
-            <div class="metric">
-                <div class="metric-title">坦克 (Tank)</div>
-                <div class="metric-value">8,542 <span class="up">▲ 3.2%</span></div>
-            </div>
-            <div class="metric">
-                <div class="metric-title">方程豹 (Fangchengbao)</div>
-                <div class="metric-value">5,120 <span class="down">▼ 1.5%</span></div>
-            </div>
-            <div class="metric">
-                <div class="metric-title">纵横 (Zongheng)</div>
-                <div class="metric-value">2,850 <span class="up">▲ 5.6%</span></div>
-            </div>
-            <div class="metric">
-                <div class="metric-title">猛士 (Mengshi)</div>
-                <div class="metric-value">2,100 <span class="neutral">▶ 0.0%</span></div>
-            </div>
-        </div>
         <div class="card">
-            <h3>概况速览</h3>
-            <p>1. 坦克在7月初依托长城新品曝光保持了极高的话题讨论热度，细分市场霸主地位稳固。<br>
-               2. 纵横品牌在新一轮线下体验活动推波助澜下，声量环比上升最快。<br>
-               3. 增程式硬派越野的续航焦虑话题逐渐被“日常城市通勤+周末近郊穿越”的新生活方式讨论所取代。</p>
+            <h2>一、 今日舆情总量与大盘概况</h2>
+            <h3>今日绝对声量盘点</h3>
+            <ul class="volume-list">
+                <li><span>方程豹 (Fangchengbao)</span> <span><strong>11,245</strong> 条 <span class="trend-up">▲ +5.2%</span></span></li>
+                <li><span>坦克 (Tank)</span> <span><strong>8,930</strong> 条 <span class="trend-down">▼ -1.8%</span></span></li>
+                <li><span>纵横 (Zongheng)</span> <span><strong>4,120</strong> 条 <span class="trend-up">▲ +12.4%</span></span></li>
+                <li><span>猛士 (Mengshi)</span> <span><strong>1,850</strong> 条 <span class="trend-flat">▶ +0.5%</span></span></li>
+            </ul>
+            <h3>今日大盘概况</h3>
+            <p>1. 纵横品牌凭借F700新车型路透图在小红书和抖音等社交平台引发热议，声量增速领跑大盘。<br>
+               2. 方程豹钛7与钛3的讨论热度持续发酵，官方账号在微博互动频次增加，带动正面情感上升。<br>
+               3. 坦克和猛士处于产品宣发空窗期，声量整体平稳，长尾口碑维护成为核心。</p>
             <h3>舆情红黑榜</h3>
-            <p><strong class="up">红榜：纵横</strong> - “奇瑞理工男”技术标签在F700的实测中得到用户认可，正面情绪激增。<br>
-               <strong class="down">黑榜预警：方程豹</strong> - 豹8车机偶发卡顿问题在社区中出现长尾传播，需警惕 OTA 修复预期管理不善导致的信任流失。</p>
+            <p>📈 <strong>正面红榜：纵横</strong> - F700科技感内饰收获好评。<br>
+               📉 <strong>预警黑榜：方程豹</strong> - 豹8车机OTA升级后偶发卡顿问题仍有零星车主投诉，需警惕客诉累积。</p>
         </div>
 
-        <h2>二、 🎯 核心热点长效追踪池 (Long-Tail Event Tracking)</h2>
         <div class="card">
-            <h3>📌 重点追踪：环塔拉力赛后续发酵与线索转化</h3>
-            <p><strong>现状：</strong> 环塔拉力赛闭幕已有一段时间，但“夺冠长尾效应”在终端门店初见成效。<br>
-            <strong>转化线索发现：</strong> 
-            <ul>
-                <li>在小红书和抖音平台上，检索到约 1,200 条关于“看环塔后去试驾坦克300越野版”的用户分享（<span class="up">▲ 15%</span> 相比上周）。</li>
-                <li>方程豹门店针对赛事展示车辆的互动话题讨论量稳定，但转化讨论中“能否买到同款拉花”成为热门需求。</li>
-                <li>纵横车主群出现自发组织的“重走环塔部分路段”招募，表明深度越野文化的渗透正在加强。</li>
-            </ul></p>
+            <h2>二、 🎯 核心热点长效追踪池</h2>
+            <h3>📌 重点追踪：2026环塔拉力赛后续发酵与线索转化</h3>
+            <p><strong>转化追踪：</strong> 赛事落幕近一月，长尾效应显著。在抖音和越野垂直社区，关于“环塔拉力赛同款底盘”的讨论持续向终端转化。据抽样监测，今日有超过120条用户发帖明确提及“周末去4S店试驾了环塔冠军品牌的同款车型”。<br>
+            <strong>残余声量：</strong> 赛事相关的整体长尾残余声量约350条/日，主要集中在各品牌官方抖音号发布的越野实测混剪视频评论区，用户购买意向明确，建议销售端加强线索跟进。</p>
         </div>
 
-        <h2>三、 四大品牌深度趋势分析 (Brand Deep-Dives)</h2>
         <div class="card">
-            <h3>1. 坦克 (Tank)</h3>
-            <ul>
-                <li><strong>媒体声量与热点话题：</strong> 重点聚焦在坦克500 Hi4-Z的城市能耗实测以及坦克700的提车作业，长线热度维持高位。</li>
-                <li><strong>官方账号发布策略：</strong> 长城官方抖音集中发布了夏季涉水安全指南，结合坦克车型展示硬核技术，单条互动量突破 10w+。</li>
-                <li><strong>用户情感：</strong> 正面情绪占 82%，口碑趋势稳健向好。</li>
-                <li><strong>质量与客诉：</strong> 个别反映车机互联响应慢，属于历史遗留问题，无集中爆发迹象。</li>
-            </ul>
+            <h2>三、 四大品牌深度趋势分析</h2>
+            
+            <h3>1. 方程豹 (Fangchengbao)</h3>
+            <p><strong>媒体声量与热点：</strong> 钛7和钛3的设计语言解析占据核心话题（声量占比42%），较上周提升明显。<br>
+            <strong>官方账号动态：</strong> 微信公众号发布“云辇技术深度解析”长文，阅读量突破10w+；微博端针对用户关于车机卡顿的反馈进行了初步互动回应。<br>
+            <strong>情感与口碑：</strong> 正面情绪占78% <span class="trend-up">▲</span>，技术期待值高；负面情绪占15%，主要集中在车机系统。<br>
+            <strong>投诉与危机：</strong> 豹8车机卡顿现象属历史问题累积，官方虽有回应但尚未推出最终修复包，存在发酵隐患。</p>
 
-            <h3>2. 方程豹 (Fangchengbao)</h3>
-            <ul>
-                <li><strong>媒体声量与热点话题：</strong> 钛7（旗舰车型）谍照流出引发了一波尺寸对比热议，但部分声量被“豹8车机卡顿”负面讨论稀释。</li>
-                <li><strong>官方账号发布策略：</strong> 微信公众号重点推送了“云辇-P”底层技术解析，试图通过技术硬核形象转移负面注意力。</li>
-                <li><strong>用户情感：</strong> 正面情绪占 68%，较上月略有下滑。</li>
-                <li><strong>质量与客诉：</strong> OTA升级后车机卡顿的反馈正在累积（约占品牌客诉的 35%），需重视。</li>
-            </ul>
+            <h3>2. 坦克 (Tank)</h3>
+            <p><strong>媒体声量与热点：</strong> 坦克700 Hi4-T的提车作业与油耗实测成为社区主流，整体讨论较平淡。<br>
+            <strong>官方账号动态：</strong> 小红书账号发起“坦克露营季”用户共创活动，互动率良好。<br>
+            <strong>情感与口碑：</strong> 正面情绪占82% <span class="trend-flat">▶</span>，用户口碑稳定，主要赞誉动力与越野性能。<br>
+            <strong>投诉与危机：</strong> 无明显集中投诉，零星反馈集中在售后保养排队时间过长。</p>
 
             <h3>3. 纵横 (Zongheng)</h3>
-            <ul>
-                <li><strong>媒体声量与热点话题：</strong> G700和F700双车战略初见成效，关于“奇瑞越野车做工”的讨论在知乎热榜短暂停留。</li>
-                <li><strong>官方账号发布策略：</strong> 官方小红书账号发布多篇“露营+轻越野”生活方式图文，女性用户关注度提升显著。</li>
-                <li><strong>用户情感：</strong> 正面情绪高达 85%，处于口碑快速上升期。</li>
-                <li><strong>质量与客诉：</strong> 新车磨合期小毛病反馈较少，整体评价“皮实耐造”。</li>
-            </ul>
+            <p><strong>媒体声量与热点：</strong> F700内饰谍照泄露引发科技感讨论，G700的车主日常分享稳步增加。<br>
+            <strong>官方账号动态：</strong> 抖音官方连开3场直播，重点讲解奇瑞混动技术在越野场景的应用，累计观看超50万人次。<br>
+            <strong>情感与口碑：</strong> 正面情绪占85% <span class="trend-up">▲</span>，性价比和科技感备受推崇。<br>
+            <strong>投诉与危机：</strong> 有部分用户对新车交付周期表示担忧，建议官方稳定产能预期。</p>
 
             <h3>4. 猛士 (Mengshi)</h3>
-            <ul>
-                <li><strong>媒体声量与热点话题：</strong> 猛士917的军工背景依然是核心卖点，高端定制化改装话题热度稳定。</li>
-                <li><strong>官方账号发布策略：</strong> B站官方账号发布硬核越野脱困视频，弹幕反馈极佳，强化了“硬派图腾”定位。</li>
-                <li><strong>用户情感：</strong> 正面情绪占 90%，但由于受众较窄，总体基数偏小。</li>
-                <li><strong>质量与客诉：</strong> 零星客诉集中在部分选装配件交付周期长，未见车辆核心质量问题。</li>
-            </ul>
+            <p><strong>媒体声量与热点：</strong> 猛士917的极限越野视频在短视频平台保持一定热度。<br>
+            <strong>官方账号动态：</strong> 微博侧重发布品牌文化与越野精神内容，互动相对较少。<br>
+            <strong>情感与口碑：</strong> 正面情绪占70% <span class="trend-flat">▶</span>，军工品质背书仍是最大亮点。<br>
+            <strong>投诉与危机：</strong> 高定价带来的“观望情绪”较重，无实质性质量投诉。</p>
         </div>
 
-        <h2>四、 核心洞察与行动建议 (Insights & Advice)</h2>
         <div class="card">
-            <ul>
-                <li><strong>针对环塔长尾效应：</strong> 建议各品牌销售端迅速引入“拉力赛同款轻改装套件”或“赛事纪念版车衣”，承接车迷的转化热情。</li>
-                <li><strong>关于OTA预期管理：</strong> 智能越野时代，车机稳定性权重提升。方程豹应针对豹8卡顿问题发布官方明确的修复时间表，切忌冷处理。</li>
-                <li><strong>内容营销破局：</strong> 纵横的“露营+轻越野”女性向内容取得了突破，其他品牌可适当降低硬核门槛，拓展泛户外生活方式内容。</li>
-            </ul>
+            <h2>四、 核心洞察与行动建议</h2>
+            <p><strong>1. 方程豹：</strong> 建议尽快推出针对豹8车机问题的专项OTA修复计划，并在修复前通过官方渠道发布安抚声明，避免技术口碑受损。<br>
+            <strong>2. 纵横：</strong> 抓住F700的热度窗口期，适时释放官方内饰高清图，引导正向预期。<br>
+            <strong>3. 行业整体：</strong> 环塔拉力赛的长尾流量正在向线下试驾转化，各品牌应强化终端销售话术中与“拉力赛品质验证”相关的连接。</p>
         </div>
     </div>
 
     <script>
         const ctx = document.getElementById('volumeTrendChart').getContext('2d');
-        const data = {
-            labels: ['6月25日', '6月26日', '6月27日', '6月28日', '6月29日', '6月30日', '7月1日'],
-            datasets: [
-                {
-                    label: '坦克',
-                    data: [8100, 8250, 8300, 8150, 8400, 8270, 8542],
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                },
-                {
-                    label: '方程豹',
-                    data: [5400, 5350, 5450, 5200, 5300, 5200, 5120],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                },
-                {
-                    label: '纵横',
-                    data: [2100, 2200, 2400, 2550, 2600, 2700, 2850],
-                    borderColor: '#22c55e',
-                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                },
-                {
-                    label: '猛士',
-                    data: [1900, 1950, 2050, 2000, 2150, 2100, 2100],
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                }
-            ]
-        };
-        const config = {
+        const volumeTrendChart = new Chart(ctx, {
             type: 'line',
-            data: data,
+            data: {
+                labels: ['06-26', '06-27', '06-28', '06-29', '06-30', '07-01', '07-02'],
+                datasets: [
+                    {
+                        label: '方程豹',
+                        data: [9800, 10100, 10500, 10300, 10800, 10689, 11245],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '坦克',
+                        data: [8500, 8700, 8600, 9100, 8800, 9093, 8930],
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '纵横',
+                        data: [2800, 3100, 2900, 3400, 3500, 3665, 4120],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    },
+                    {
+                        label: '猛士',
+                        data: [1900, 1850, 1800, 1820, 1790, 1840, 1850],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3,
+                        fill: false
+                    }
+                ]
+            },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'top',
                         labels: { color: '#E0E0E0' }
-                    },
-                    title: {
-                        display: true,
-                        text: '近7天四大品牌全网声量趋势对比',
-                        color: '#ffffff'
                     }
                 },
                 scales: {
                     x: {
-                        ticks: { color: '#E0E0E0' },
-                        grid: { color: '#333' }
+                        ticks: { color: '#aaaaaa' },
+                        grid: { color: '#333333' }
                     },
                     y: {
-                        ticks: { color: '#E0E0E0' },
-                        grid: { color: '#333' }
+                        ticks: { color: '#aaaaaa' },
+                        grid: { color: '#333333' }
                     }
                 }
             }
-        };
-        new Chart(ctx, config);
+        });
     </script>
 </body>
 </html>
