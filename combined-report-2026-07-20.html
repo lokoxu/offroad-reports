@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-07-20)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { background-color: #121212; color: #E0E0E0; font-family: sans-serif; margin: 0; padding: 20px; }
+  .card { background-color: #1E1E1E; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+  .up { color: #22c55e; }
+  .down { color: #ff6b6b; }
+  .flat { color: #8b95a8; }
+</style>
+</head>
+<body>
+<h1>📊 硬派越野SUV品牌日常舆情与趋势分析日报</h1>
+<p>日期：2026-07-20</p>
+
+<div class="card">
+  <h2>核心新增：可视化动态趋势图 (过去7天声量)</h2>
+  <canvas id="volumeTrendChart" style="max-height: 300px;"></canvas>
+</div>
+
+<div class="card">
+  <h2>一、 今日舆情总量与大盘概况</h2>
+  <p><strong>绝对声量盘点：</strong>今日因Jina API故障全网数据无显著新增，基于过去一周累计基数分析。</p>
+  <ul>
+    <li>方程豹：6条 (环比 <span class="flat">▶ 0%</span>)</li>
+    <li>坦克：6条 (环比 <span class="flat">▶ 0%</span>)</li>
+    <li>纵横：6条 (环比 <span class="flat">▶ 0%</span>)</li>
+    <li>猛士：5条 (环比 <span class="flat">▶ 0%</span>)</li>
+  </ul>
+  <p><strong>大盘概况：</strong>新能源硬派越野市场进入技术沉淀期，各品牌集中在产品力传播与圈层口碑维护。混动与纯电路线依然是舆论焦点。</p>
+</div>
+
+<div class="card">
+  <h2>二、 🎯 核心热点长效追踪池</h2>
+  <p><strong>环塔拉力赛后续发酵与线索转化：</strong>纵横车队在环塔的表现仍在发酵，部分门店反馈因赛事夺冠带来进店量微增，长尾效应明显。</p>
+</div>
+
+<div class="card">
+  <h2>三、 四大品牌深度趋势分析</h2>
+  <h3>方程豹</h3>
+  <p>钛7、钛3新车预热及豹8 OTA卡顿事件持续受关注。</p>
+  <h3>坦克</h3>
+  <p>Hi4-Z纯电续航表现获肯定，坦克700长线口碑稳定。</p>
+  <h3>纵横</h3>
+  <p>G700水下航行与越野能力测试传播热度高。</p>
+  <h3>猛士</h3>
+  <p>M817预售与极限沙漠试驾展现硬核军工品质。</p>
+</div>
+
+<div class="card">
+  <h2>四、 核心洞察与行动建议</h2>
+  <p>建议各品牌在OTA升级发布前加强内测，避免负面口碑发酵；同时，继续深化赛事营销的长尾红利。</p>
+</div>
+
+<script>
+const ctx = document.getElementById('volumeTrendChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [ '07-14', '07-15', '07-16', '07-17', '07-18', '07-19', '07-20' ],
+        datasets: [
+            { label: '方程豹', data: [5,5,6,6,6,6,6], borderColor: '#f59e0b', tension: 0.1 }, { label: '坦克', data: [5,5,6,6,6,6,6], borderColor: '#3b82f6', tension: 0.1 }, { label: '纵横', data: [4,5,6,6,6,6,6], borderColor: '#10b981', tension: 0.1 }, { label: '猛士', data: [4,4,5,5,5,5,5], borderColor: '#ef4444', tension: 0.1 }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { labels: { color: '#E0E0E0' } }
+        },
+        scales: {
+            x: { ticks: { color: '#E0E0E0' } },            y: { ticks: { color: '#E0E0E0' } }        }    }});</script>
+</body>
+</html>
