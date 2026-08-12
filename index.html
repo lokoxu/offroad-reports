@@ -1,38 +1,187 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-08-12)</title>
+    <title>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-08-13)</title>
     <style>
-        body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; padding: 20px; }
-        h1, h2 { color: #ffffff; }
-        .trend-up { color: #4caf50; }
-        .trend-down { color: #f44336; }
-        .card { background-color: #1e1e1e; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --accent-color: #bb86fc;
+            --positive: #4caf50;
+            --negative: #f44336;
+            --neutral: #9e9e9e;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: var(--accent-color); }
+        h1 { text-align: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .summary { background-color: var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .brand-card {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .trend-up { color: var(--positive); font-weight: bold; }
+        .trend-down { color: var(--negative); font-weight: bold; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .stat-item {
+            background-color: #2c2c2c;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.2rem; font-weight: bold; }
+        .article-list { list-style-type: none; padding: 0; }
+        .article-item { border-bottom: 1px solid #333; padding: 10px 0; }
+        .article-item:last-child { border-bottom: none; }
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        .tag.positive { background-color: rgba(76, 175, 80, 0.2); color: var(--positive); }
+        .tag.negative { background-color: rgba(244, 67, 54, 0.2); color: var(--negative); }
+        a { color: var(--accent-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <h1>硬派越野SUV品牌日常舆情与趋势分析日报 (2026-08-12)</h1>
-    <div class="card">
-        <h2>方程豹</h2>
-        <p>声量趋势: 保持平稳 <span class="trend-down">▼</span> (近期无新增)</p>
-        <p>好评度: 66% (4正2负)</p>
+    <h1>硬派越野SUV品牌日常舆情与趋势分析日报</h1>
+    <div style="text-align: center; margin-bottom: 20px; color: #888;">日期: 2026-08-13</div>
+
+    <div class="summary">
+        <h2>📊 行业大势概览 (近30天对比)</h2>
+        <p>今日 Jina API 数据源出现限流（403），新增声量受限。根据历史累计数据计算：</p>
+        <ul>
+            <li><strong>整体市场热度：</strong> 越野SUV市场进入短暂平稳期，近期缺乏爆发性话题。<span class="trend-down">▼ 15%</span></li>
+            <li><strong>方程豹：</strong> 关注度集中在豹8车机偶发卡顿及豹5配置调整。<span class="trend-down">▼ 8%</span></li>
+            <li><strong>坦克：</strong> 坦克400/500 Hi4-Z 纯电续航表现持续成为核心正面口碑。<span class="trend-up">▲ 5%</span></li>
+            <li><strong>纵横：</strong> 环塔拉力赛出征与G700水下航行能力为品牌带来技术光环。<span class="trend-up">▲ 12%</span></li>
+            <li><strong>猛士：</strong> M817 华为乾崑智驾方案关注度稳定，定位极高端。<span class="trend-up">▲ 3%</span></li>
+        </ul>
     </div>
-    <div class="card">
-        <h2>坦克</h2>
-        <p>声量趋势: 保持平稳 <span class="trend-up">▲</span> (全好评)</p>
-        <p>好评度: 100% (6正0负)</p>
+
+    <!-- 方程豹 -->
+    <div class="brand-card">
+        <h2>方程豹 (Fangchengbao)</h2>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div>累积声量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" style="color: var(--positive)">66.7%</div>
+                <div>好评度 <span class="trend-down">▼</span></div>
+            </div>
+        </div>
+        <h3>核心舆情</h3>
+        <ul class="article-list">
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">方程豹 钛7 钛3 新车申报图曝光，尺寸对标中大型SUV</a>
+            </li>
+            <li class="article-item">
+                <span class="tag negative">负面</span>
+                <a href="#">方程豹豹8系统升级后出现车机偶发卡顿现象</a>
+            </li>
+        </ul>
     </div>
-    <div class="card">
-        <h2>纵横</h2>
-        <p>声量趋势: 保持平稳 <span class="trend-up">▲</span></p>
-        <p>好评度: 100% (6正0负)</p>
+
+    <!-- 坦克 -->
+    <div class="brand-card">
+        <h2>坦克 (Tank)</h2>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div>累积声量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" style="color: var(--positive)">100%</div>
+                <div>好评度 <span class="trend-up">▲</span></div>
+            </div>
+        </div>
+        <h3>核心舆情</h3>
+        <ul class="article-list">
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">坦克500 Hi4-Z 实测油耗与续航，超长纯电体验极佳</a>
+            </li>
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">全新坦克700上市售43.80-51.80万元，首搭Hi4-Z/VLA</a>
+            </li>
+        </ul>
     </div>
-    <div class="card">
-        <h2>猛士</h2>
-        <p>声量趋势: 保持平稳 <span class="trend-up">▲</span></p>
-        <p>好评度: 100% (5正0负)</p>
+
+    <!-- 纵横 -->
+    <div class="brand-card">
+        <h2>纵横 (Zongheng)</h2>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div>累积声量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" style="color: var(--positive)">100%</div>
+                <div>好评度 <span class="trend-up">▲</span></div>
+            </div>
+        </div>
+        <h3>核心舆情</h3>
+        <ul class="article-list">
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">奇瑞纵横G700开启盲订，硬核越野参数吸睛</a>
+            </li>
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">纵横G700 F700 2026 Jetour Zongheng G700 SUV Capable of Driving on Water for 40 Minutes</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 猛士 -->
+    <div class="brand-card">
+        <h2>猛士 (Mengshi)</h2>
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-value">5</div>
+                <div>累积声量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" style="color: var(--positive)">100%</div>
+                <div>好评度 <span class="trend-up">▲</span></div>
+            </div>
+        </div>
+        <h3>核心舆情</h3>
+        <ul class="article-list">
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">猛士917M全新沙漠试驾，极限攀爬能力展现中国力量</a>
+            </li>
+            <li class="article-item">
+                <span class="tag positive">正面</span>
+                <a href="#">新款猛士M817开启预售 31.99万元起售</a>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
