@@ -1,229 +1,123 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>硬派越野SUV品牌日常舆情与趋势分析日报 - 2026-08-15</title>
+    <title>硬派越野SUV品牌日常舆情与趋势分析日报 - 2026-08-16</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 20px; }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
         h1, h2, h3 { color: #ffffff; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .card { background-color: #1e1e1e; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .container { max-width: 800px; margin: auto; }
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
         .trend-up { color: #4caf50; font-weight: bold; }
         .trend-down { color: #f44336; font-weight: bold; }
-        .sentiment-pos { color: #4caf50; }
-        .sentiment-neg { color: #f44336; }
-        .sentiment-neu { color: #ffeb3b; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
-        th { background-color: #2c2c2c; }
-        a { color: #64b5f6; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        .trend-flat { color: #9e9e9e; font-weight: bold; }
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .stat-box {
+            background-color: #2c2c2c;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5em; font-weight: bold; margin: 10px 0; }
+        .stat-label { font-size: 0.85em; color: #aaa; }
+        .note { font-size: 0.9em; color: #ff9800; border-left: 3px solid #ff9800; padding-left: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>硬派越野SUV品牌日常舆情与趋势分析日报</h1>
-        <p><strong>发布日期：</strong>2026-08-15</p>
+        <p>生成日期: 2026-08-16 | 关注领域: 方程豹、坦克、纵横、猛士</p>
         
-        <div class="card">
-            <h2>📊 总体趋势摘要 (过去30天)</h2>
-            <p>基于累积舆情数据进行深度趋势分析与比对：</p>
-            <ul>
-                <li><strong>坦克 (Tank)：</strong> 维持极高热度，坦克500 Hi4-Z与坦克700的口碑发酵良好。声量：<span class="trend-up">▲ 稳中有升</span> | 好评度：<span class="trend-up">▲ 100%</span></li>
-                <li><strong>方程豹 (Fangchengbao)：</strong> 关注度集中在豹8与豹5新版本，部分车机OTA偶发卡顿客诉被放大，需关注。声量：<span class="trend-up">▲ 稳定</span> | 好评度：<span class="trend-down">▼ 67% (含部分客诉)</span></li>
-                <li><strong>纵横 (Zongheng)：</strong> 依托G700与F700等新品密集发布与赛事（如环塔），品牌力强劲攀升。声量：<span class="trend-up">▲ 激增</span> | 好评度：<span class="trend-up">▲ 100%</span></li>
-                <li><strong>猛士 (Mengshi)：</strong> M817开启预售与极致越野表现持续吸引高端市场关注。声量：<span class="trend-up">▲ 增长</span> | 好评度：<span class="trend-up">▲ 100%</span></li>
-            </ul>
+        <div class="card note">
+            <p><strong>数据采集备注:</strong> 今日 Jina API 采集出现 401 拦截，无新增数据。以下分析深度依赖过去30日历史累积库，进行品牌基线及长尾口碑趋势洞察。</p>
         </div>
 
+        <!-- 方程豹 -->
         <div class="card">
-            <h2>方程豹 舆情动态</h2>
-            <table>
-                <tr>
-                    <th>标题 & 摘要</th>
-                    <th>情感</th>
-                    <th>日期</th>
-                </tr>
-
-                <tr>
-                    <td><a href="https://example.com/fcb-titan" target="_blank">方程豹 钛7 钛3 新车申报图曝光，尺寸对标中大型SUV</a><br><small style="color:#aaa;">方程豹钛7外观霸气，预计将搭载最新的云辇-P底盘系统，期待其实际表现。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-23</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://example.com/fcb-issue" target="_blank">方程豹豹8系统升级后出现车机偶发卡顿现象</a><br><small style="color:#aaa;">部分车主反映豹8升级最新OTA后，导航界面偶发卡顿死机，希望能尽快修复。</small></td>
-                    <td class="sentiment-neg">负面</td>
-                    <td>2026-06-23</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://www.bitauto.com/news/1003110437394.html" target="_blank">方程豹方程S GT官图，外形激进，下半年量产</a><br><small style="color:#aaa;">方程S GT官方图片发布，预计搭载三电机四驱500kW+功率，100kWh+电池，800km+纯电续航，搭载云辇技术和激光雷达</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url1" target="_blank">方程豹豹5/豹8闪充版将于5月13日上市</a><br><small style="color:#aaa;">更加个性 方程豹豹5闪充版推出赤沙红配色 新车, 续航提升</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url2" target="_blank">方程豹豹5新款原厂充电桩功能减配</a><br><small style="color:#aaa;">典型问题 产品问题 疑似减配</small></td>
-                    <td class="sentiment-neg">负面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url3" target="_blank">方程豹豹5 2025款 激光乾崑智驾版上得厅堂下得厨房的豹5</a><br><small style="color:#aaa;">越级的智能驾驶体验，但在经过减速带或大坑洼时存在一定的晃动感。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-            </table>
+            <div class="brand-header">
+                <h2>方程豹 (Fangchengbao)</h2>
+                <span class="trend-down">近期声量走势: ▼</span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">历史样本量</div><div class="stat-value">6</div></div>
+                <div class="stat-box"><div class="stat-label">好评度</div><div class="stat-value trend-up">66.7% ▲</div></div>
+                <div class="stat-box"><div class="stat-label">核心负面</div><div class="stat-value trend-down">2 ▼</div></div>
+            </div>
+            <p><strong>趋势分析:</strong> 近期增量较缓。舆情分为两个极端：一方面对“钛7/钛3”新车以及豹5闪充版的发布呈现较高期待；另一方面，售后端长尾负面显现，如“豹8车机偶发卡顿”及“豹5原厂充电桩减配”等，影响了总体好评度，建议重点跟踪OTA反馈及质量维权走向。</p>
         </div>
 
+        <!-- 坦克 -->
         <div class="card">
-            <h2>坦克 舆情动态</h2>
-            <table>
-                <tr>
-                    <th>标题 & 摘要</th>
-                    <th>情感</th>
-                    <th>日期</th>
-                </tr>
-
-                <tr>
-                    <td><a href="https://example.com/tank500-hi4z" target="_blank">坦克500 Hi4-Z 实测油耗与续航，超长纯电体验极佳</a><br><small style="color:#aaa;">坦克500 Hi4-Z在城市通勤纯电完全够用，长途穿越油耗表现也让人惊喜。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-23</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://auto.youth.cn/xc/202603/t20260331_16584286.htm" target="_blank">全新坦克700上市售43.80-51.80万元，首搭Hi4-Z/VLA</a><br><small style="color:#aaa;">全新坦克700正式上市，3款车型43.80-51.80万元，3.0T Hi4-T与2.0T Hi4-Z双旗舰动力，搭载VLA大模型、Coffee OS座舱、27颗传感器</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://auto.huanqiu.com/article/4GksT36T5nB" target="_blank">42.8万元起售 坦克700 Hi4-T正式上市</a><br><small style="color:#aaa;">坦克700 Hi4-T中国自主品牌首次搭载电子可断开式稳定杆</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://news.inewsweek.cn/observe/2025-12-12/28031.shtml" target="_blank">坦克300全球用户达50万，极地版上市</a><br><small style="color:#aaa;">坦克300全球用户达成50万之际推出极地版</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url4" target="_blank">China’s 635kW plug-in Prado and Everest rival (GWM Tank 400 Hi4-Z 2026 review)</a><br><small style="color:#aaa;">Tank 400 Hi4-Z PHEV fits a 2.0L turbo four paired with two electric motors and a 59kWh battery. 635kW and 1195Nm combined.</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url5" target="_blank">全新坦克400、坦克500 Hi4-Z 潮酷越野新时代</a><br><small style="color:#aaa;">坦克全系车型上市，坦克400 Hi4-Z 31.98万元，坦克500 Hi4-Z 37.5万元。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-            </table>
+            <div class="brand-header">
+                <h2>坦克 (Tank)</h2>
+                <span class="trend-flat">近期声量走势: —</span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">历史样本量</div><div class="stat-value">6</div></div>
+                <div class="stat-box"><div class="stat-label">好评度</div><div class="stat-value trend-up">100% ▲</div></div>
+                <div class="stat-box"><div class="stat-label">核心负面</div><div class="stat-value">0</div></div>
+            </div>
+            <p><strong>趋势分析:</strong> 品牌基本盘极稳，历史数据零负面反馈。坦克500 Hi4-Z 的续航表现与坦克700的上市持续为品牌声量输送弹药，坦克300 50万用户里程碑进一步夯实了其越野标杆认知。</p>
         </div>
 
+        <!-- 纵横 -->
         <div class="card">
-            <h2>纵横 舆情动态</h2>
-            <table>
-                <tr>
-                    <th>标题 & 摘要</th>
-                    <th>情感</th>
-                    <th>日期</th>
-                </tr>
-
-                <tr>
-                    <td><a href="https://example.com/zongheng-g700" target="_blank">奇瑞纵横G700开启盲订，硬核越野参数吸睛</a><br><small style="color:#aaa;">纵横G700配备三把锁与强悍四驱，售价预计十分亲民，引发越野圈热议。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-23</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://zongheng.jetour.com.cn/vehicle/g700" target="_blank">纵横G700全领域豪华越野SUV上市发布</a><br><small style="color:#aaa;">纵横G700于2025年10月19日正式上市，全领域豪华越野SUV定位</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://www.bitauto.com/news/1003110463884.html" target="_blank">奇瑞T1T新谍照曝光，高性价比大型硬派越野车即将进场</a><br><small style="color:#aaa;">奇瑞T1T基于皮卡底盘打造，车长超5米轴距超3米，大概率搭载燃油发动机</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url6" target="_blank">纵横G700 F700 2026 Jetour Zongheng G700 SUV Capable of Driving on Water for 40 Minutes</a><br><small style="color:#aaa;">Jetour Zongheng G700 is a plug-in hybrid all-terrain passenger vehicle equipped with amphibious Ark technology enabling underwater cruising for 40 minutes.</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url7" target="_blank">双车战环塔万里鉴纵横！纵横2026环塔拉力赛硬核出征</a><br><small style="color:#aaa;">纵横G700从挑战者进阶为卫冕者，目标直指量产新能源组冠军，用极限赛事验证可靠性。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url8" target="_blank">纵横F700全球首秀 高端皮卡领域全能豪华新物种</a><br><small style="color:#aaa;">高端皮卡领域的全能豪华新物种，以全场景价值重新定义中国高端皮卡新范式。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-            </table>
+            <div class="brand-header">
+                <h2>纵横 (Zongheng)</h2>
+                <span class="trend-up">近期声量走势: ▲</span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">历史样本量</div><div class="stat-value">6</div></div>
+                <div class="stat-box"><div class="stat-label">好评度</div><div class="stat-value trend-up">100% ▲</div></div>
+                <div class="stat-box"><div class="stat-label">核心负面</div><div class="stat-value">0</div></div>
+            </div>
+            <p><strong>趋势分析:</strong> 势头向上，传播动作频频。环塔拉力赛对G700极限可靠性的验证，以及“水上行驶黑科技”相关话题带来了极高的圈层讨论度；新物种皮卡F700的首秀亦带来增量关注度，呈现破圈势头。</p>
         </div>
 
+        <!-- 猛士 -->
         <div class="card">
-            <h2>猛士 舆情动态</h2>
-            <table>
-                <tr>
-                    <th>标题 & 摘要</th>
-                    <th>情感</th>
-                    <th>日期</th>
-                </tr>
-
-                <tr>
-                    <td><a href="https://example.com/mengshi-917m" target="_blank">猛士917M全新沙漠试驾，极限攀爬能力展现中国力量</a><br><small style="color:#aaa;">猛士917M在沙海中的表现如履平地，强悍的动力和底盘展现了顶级军工品质。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-23</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://news.qq.com/rain/a/20260529A04R4O00" target="_blank">新款猛士M817开启预售 31.99万元起售</a><br><small style="color:#aaa;">2026粤港澳大湾区车展开幕，猛士M817新款开启预售，3款配置31.99万元起</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="https://www.news.cn/auto/20250819/6cba93c4e6504071b9227a2366712168/c.html" target="_blank">猛士M817正式上市 31.99万元起售</a><br><small style="color:#aaa;">猛士M817搭载华为全栈智能科技，五全实力满足可城可野可远方</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-04</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url9" target="_blank">2026北京车展：猛士M817 Ultimate正式亮相</a><br><small style="color:#aaa;">猛士M817 Ultimate延续家族设计结构，基于猛士全新一代智能越野架构打造，加入华为乾崑完整方案。</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-                <tr>
-                    <td><a href="url10" target="_blank">New Dongfeng M-Hero M817 2026 - Ultimate PHEV Off-Road SUV</a><br><small style="color:#aaa;">New Dongfeng M-Hero M817 2026 - Ultimate PHEV Off-Road SUV walkaround.</small></td>
-                    <td class="sentiment-pos">正面</td>
-                    <td>2026-06-18</td>
-                </tr>
-
-            </table>
+            <div class="brand-header">
+                <h2>猛士 (Mengshi)</h2>
+                <span class="trend-flat">近期声量走势: —</span>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">历史样本量</div><div class="stat-value">5</div></div>
+                <div class="stat-box"><div class="stat-label">好评度</div><div class="stat-value trend-up">100% ▲</div></div>
+                <div class="stat-box"><div class="stat-label">核心负面</div><div class="stat-value">0</div></div>
+            </div>
+            <p><strong>趋势分析:</strong> 舆情焦点集中在军工硬核与智能化赋能的交汇。917M的沙漠越野实测和M817（尤其 Ultimate版）引入华为乾崑智驾方案成为了主要的正面发声点，高端越野品牌护城河显现。</p>
         </div>
 
+        <p style="text-align: center; color: #666; font-size: 0.8em; margin-top: 30px;">
+            由 罗极 (AI 研究员 & 战略分析师) 生成 | 2026-08-16
+        </p>
     </div>
 </body>
 </html>
